@@ -1,0 +1,17 @@
+$break-tablet: 870px;
+
+.homepage {
+  display: flex;
+
+  @media screen and (max-width: $break-tablet) {
+    flex-direction: column;
+  }
+
+  .container {
+    width: calc(100% - 200px);
+
+    @media screen and (max-width: $break-tablet) {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,245 @@
+$break-laptop: 1000px;
+$break-tablet: 870px;
+$break-mobile: 550px;
+
+#dashboard {
+  display: flex;
+  flex-direction: column;
+  background-color: #d3d3d3;
+  height: calc(100% - 80px);
+  margin-top: 80px;
+
+  @media screen and (max-width: $break-tablet) {
+    margin-top: 0;
+  }
+
+  #columns {
+    display: flex;
+    flex: 1 0 75%;
+
+    @media screen and (max-width: $break-laptop) {
+      flex-wrap: wrap;
+    }
+
+    #column1,
+    #column2,
+    #column3 {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      @media screen and (max-width: $break-laptop) {
+        flex: 1 0 51%;
+      }
+    }
+
+    #column1 {
+      .widget {
+        flex: 1 0 auto;
+      }
+    }
+
+    #column2 {
+      .widget {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    #column3 {
+      @media screen and (max-width: $break-tablet) {
+        flex-wrap: wrap;
+        flex-direction: row;
+      }
+      #column3-widgets {
+        display: flex;
+        flex-direction: column;
+        flex: 1 0 70%;
+
+        @media screen and (max-width: $break-laptop) {
+          flex: 1 0 25%;
+        }
+      }
+
+      #column3-innerSection {
+        flex: 1 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+
+        @media screen and (max-width: $break-tablet) {
+          flex: 1 0 45%;
+          flex-wrap: wrap;
+        }
+
+        article {
+          flex: 1 0 30%;
+          max-height: 130px;
+          color: white;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+          @media screen and (max-width: $break-laptop) {
+            flex: 1 0 20%;
+          }
+
+          @media screen and (max-width: $break-tablet) {
+            flex: 1 0 30%;
+          }
+
+          @media screen and (max-width: $break-mobile) {
+            flex: 1 0 45%;
+          }
+        }
+
+        p {
+          margin: 0;
+        }
+
+        #column3-innerSection-article-topLeft {
+          background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+            url("https://thecontextofthings.com/wp-content/uploads/2017/02/easy-work.png")
+              no-repeat center;
+          background-size: cover;
+        }
+
+        #column3-innerSection-article-topRight {
+          background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+            url("https://vortini.com/wp-content/uploads/2018/01/sales-growth-conversion-rates.png")
+              no-repeat center;
+          background-size: cover;
+
+          #sales-header {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          #view-sales-btn {
+            cursor: pointer;
+          }
+        }
+
+        #column3-innerSection-article-bottomLeft {
+          background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+            url("https://designadvisor.net/wp-content/uploads/2018/10/What-is-responsive-web-designadvisor.net_.gif")
+              no-repeat center;
+          background-size: cover;
+        }
+
+        #column3-innerSection-article-bottomRight {
+          background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+            url("https://www.zend.com/sites/zend/files/image/2019-11/db3eb9bc-01a0-11ea-9f43-008cfa043684_0.jpg")
+              no-repeat center;
+          background-size: cover;
+        }
+      }
+    }
+  }
+
+  .row {
+    display: flex;
+
+    @media screen and (max-width: $break-laptop) {
+      flex-wrap: wrap;
+    }
+
+    article {
+      flex: 1 0 22%;
+      box-sizing: border-box;
+      max-height: 100px;
+      background-color: #423f3f;
+      color: #ffffff;
+      text-align: left;
+
+      @media screen and (max-width: $break-laptop) {
+        flex: 1 0 44%;
+      }
+    }
+
+    article:hover {
+      background-color: rgba(66, 63, 63, 0.8);
+      cursor: pointer;
+    }
+
+    .statistics {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .statistics::before {
+      content: "";
+      width: 64px;
+      height: 64px;
+      background-image: url(../../../assets/button-icon-spritesheet.png);
+      background-repeat: no-repeat;
+      margin: 10px;
+    }
+
+    #users::before {
+      background-position: -128px 0;
+    }
+
+    #users:hover::before {
+      background-position: -192px 0;
+    }
+
+    #bandwidth::before {
+      background-position: 2px 0;
+    }
+
+    #bandwidth:hover::before {
+      background-position: -64px 0;
+    }
+
+    #databases::before {
+      background-position: -258px 0;
+    }
+
+    #databases:hover::before {
+      background-position: -318px 0;
+    }
+
+    #sales::before {
+      background-position: -384px 0;
+    }
+
+    #sales:hover::before {
+      background-position: -448px 0;
+    }
+  }
+
+  .widget {
+    border-radius: 5px;
+    background-color: #ffffff;
+    margin: 7px 10px;
+    text-align: center;
+    box-shadow: 0px 0px 13px 1px rgb(153, 153, 153);
+  }
+
+  .widget:hover {
+    box-shadow: 0px 0px 5px 4px #e8e8e8;
+    transition: box-shadow ease-in-out 0.2s;
+  }
+
+  #add-new-widget {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    border: none;
+    background-color: #3d38c3;
+    outline: none;
+    color: white;
+    cursor: pointer;
+
+    #plus-icon {
+      width: 30px;
+    }
+  }
+}

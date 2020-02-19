@@ -1,0 +1,83 @@
+$break-tablet: 870px;
+
+#navbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid grey;
+  height: 80px;
+  top: 0;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  width: calc(100% - 200px);
+  z-index: 2;
+
+  @media screen and (max-width: $break-tablet) {
+    display: none;
+  }
+
+  #navbar-dropdowns-container {
+    display: flex;
+
+    .navbar-dropdown {
+      margin-left: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-dropdown::before {
+      content: "";
+      width: 36px;
+      height: 36px;
+      background-image: url(/assets/icon-spritesheet.png);
+      background-repeat: no-repeat;
+    }
+
+    .navbar-dashboards::before {
+      background-position: -170px -168px;
+    }
+
+    .navbar-issues::before {
+      background-position: -238px -168px;
+    }
+
+    .navbar-projects::before {
+      background-position: -407px -271px;
+    }
+
+    .arrow-bottom::after {
+      content: "";
+      border: solid #bbbbbb;
+      border-width: 0 3px 3px 0;
+      display: inline-block;
+      padding: 3px;
+      transform: rotate(45deg);
+      margin-left: 7px;
+      cursor: pointer;
+    }
+  }
+
+  #navbar-search-profile-container {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+
+    #navbar-search {
+      border-radius: 20px;
+      border: solid 1px #cccccc;
+      height: 24px;
+      text-indent: 10px;
+      margin-right: 20px;
+      outline: none;
+    }
+
+    #navbar-profile {
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+      display: inline-block;
+      background-image: url("https://media4.s-nbcnews.com/i/newscms/2019_28/2929131/190618-allan-smith-byline1860_e20f6bbeb1d9b2496dd6943f6a3da256.jpg");
+      background-size: cover;
+    }
+  }
+}
