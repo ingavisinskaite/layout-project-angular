@@ -15,7 +15,7 @@ export class AppDataService {
     return this.http.get<Widget[]>(this.BASE_API_URL);
   }
 
-  public getWidget(id: string): Observable<Widget> {
+  public getWidget(id: number): Observable<Widget> {
     return this.http.get<Widget>(this.BASE_API_URL + id);
   }
 
@@ -27,7 +27,7 @@ export class AppDataService {
     return this.http.put<Widget>(this.BASE_API_URL + id, data);
   }
 
-  public deleteWidget(id: string): Observable<{}> {
+  public deleteWidget(id: number): Observable<{}> {
     return this.http.delete(this.BASE_API_URL + id);
   }
 }

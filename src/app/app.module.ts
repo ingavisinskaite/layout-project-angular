@@ -7,6 +7,8 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from "@angular/material/dialog";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { FormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -17,7 +19,6 @@ import { TableWidgetComponent } from "./components/table-widget/table-widget.com
 import { MessagesWidgetComponent } from "./components/messaging-widget/messaging-widget.component";
 import { AppDataService } from "./services/app-data.service";
 import { WidgetFormComponent } from "./components/widget-form/widget-form.component";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     MatSelectModule,
     MatInputModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    FormsModule
   ],
   providers: [AppDataService],
   bootstrap: [AppComponent]

@@ -5,11 +5,6 @@ import { Widget } from "src/app/models/widget.model";
 import { WidgetType } from "../../models/widget-type.model";
 import { WidgetFormComponent } from "../widget-form/widget-form.component";
 
-export interface DialogData {
-  animal: string;
-  name: string;
-}
-
 @Component({
   selector: "app-dashboard",
   templateUrl: "./dashboard.component.html",
@@ -20,8 +15,6 @@ export class DashboardComponent implements OnInit {
   column2Widgets: Widget[];
   column3Widgets: Widget[];
   WidgetType = WidgetType;
-  name: string;
-  animal: string;
 
   constructor(
     private appDataService: AppDataService,
@@ -32,7 +25,7 @@ export class DashboardComponent implements OnInit {
     this.getWidgets();
   }
 
-  private getWidgets() {
+  private getWidgets(): void {
     this.appDataService.getAllWidgets().subscribe(widgets => {
       this.column1Widgets = widgets.filter(widget => widget.column === 1);
       this.column2Widgets = widgets.filter(widget => widget.column === 2);
@@ -42,13 +35,11 @@ export class DashboardComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(WidgetFormComponent, {
-      width: "750px",
-      data: { name: this.name, animal: this.animal }
+      width: "550px"
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log("The dialog was closed");
-      this.animal = result;
     });
   }
 }

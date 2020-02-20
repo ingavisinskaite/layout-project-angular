@@ -4,12 +4,12 @@ import { WidgetType } from "./widget-type.model";
 
 export class Widget {
   constructor(
-    public id: string,
     public column: number,
     public type: WidgetType,
     public title: string,
     public headerType: HeaderType,
-    public settings: boolean,
-    public data: WidgetData
+    public settings: number,
+    public data: WidgetData,
+    public id?: string
   ) {}
 }
