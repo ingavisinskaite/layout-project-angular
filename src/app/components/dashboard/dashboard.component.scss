@@ -60,6 +60,10 @@ $break-mobile: 550px;
         @media screen and (max-width: $break-laptop) {
           flex: 1 0 25%;
         }
+
+        .widget {
+          flex: 1 0 auto;
+        }
       }
 
       #column3-innerSection {
@@ -223,6 +227,16 @@ $break-mobile: 550px;
   .widget:hover {
     box-shadow: 0px 0px 5px 4px #e8e8e8;
     transition: box-shadow ease-in-out 0.2s;
+  }
+
+  .chat {
+    display: flex;
+    flex-direction: column;
+    max-height: 500px;
+  }
+
+  .table {
+    max-height: 500px;
   }
 
   #add-new-widget {

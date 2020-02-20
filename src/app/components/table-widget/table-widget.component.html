@@ -1,10 +1,29 @@
-<article class="widget table">
-    <table class="table-data">
-        <tr class="table-header">
-            <th>#</th>
-            <th>First<br>Name</th>
-            <th>Last<br>Name</th>
-            <th>Username</th>
-        </tr>
-    </table>
-</article>
+<ng-container *ngIf="widgetData.settings">
+  <div
+    class="settings"
+    [ngClass]="{ dark: widgetData.headerType === HeaderType.Dark }"
+  >
+    <p>Conversation: {{ widgetData.title }}</p>
+    <div class="settings-icon arrow-bottom"></div>
+  </div>
+</ng-container>
+<table
+  class="table-data"
+  [ngClass]="{ 'table-with-settings': widgetData.settings }"
+>
+  <tr
+    class="table-header"
+    [ngClass]="{ dark: widgetData.headerType === HeaderType.Dark }"
+  >
+    <th>#</th>
+    <th>First<br />Name</th>
+    <th>Last<br />Name</th>
+    <th>Username</th>
+  </tr>
+  <tr *ngFor="let row of widgetData.data">
+    <td>{{ row.id }}</td>
+    <td>{{ row.firstName }}</td>
+    <td>{{ row.lastName }}</td>
+    <td>{{ row.userName }}</td>
+  </tr>
+</table>

@@ -11,5 +11,9 @@ export class TableWidgetData {
 }
 
 export class MessagesWidgetData {
-  constructor(public author: string, public message: string) {}
+  constructor(
+    public author: string,
+    public message: string,
+    public isOnRightSide: boolean
+  ) {}
 }

@@ -1,0 +1,53 @@
+<div id="widget-form" mat-dialog-content>
+  <h2 id="form-header">{{ title }}</h2>
+  <mat-form-field id="title" class="field">
+    <mat-label>Title</mat-label>
+    <input matInput />
+  </mat-form-field>
+  <mat-form-field id="column" class="field">
+    <mat-label>Column number</mat-label>
+    <input matInput type="number" min="1" max="3" />
+  </mat-form-field>
+  <mat-form-field id="widget-type" class="field">
+    <mat-label>Widget Type</mat-label>
+    <mat-select>
+      <mat-option value="0">Table</mat-option>
+      <mat-option value="1">Messaging</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field id="header-type" class="field">
+    <mat-label>Header type</mat-label>
+    <mat-select>
+      <mat-option value="0">Light</mat-option>
+      <mat-option value="1">Dark</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field id="data" class="field">
+    <mat-label>Textarea</mat-label>
+    <textarea matInput></textarea>
+  </mat-form-field>
+</div>
+<button mat-raised-button color="primary" id="save-widget" class="field">
+  ADD
+</button>
+<div mat-dialog-actions>
+  <button
+    mat-raised-button
+    color="primary"
+    id="save-widget"
+    class="field"
+    (click)="onNoClick()"
+  >
+    Cancel
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    id="save-widget"
+    class="field"
+    [mat-dialog-close]="data.animal"
+    cdkFocusInitial
+  >
+    {{ buttonAction }}
+  </button>
+</div>

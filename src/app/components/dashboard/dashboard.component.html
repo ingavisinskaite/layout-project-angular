@@ -1,9 +1,48 @@
 <div id="dashboard">
   <div id="columns">
-    <section id="column1"></section>
-    <section id="column2"></section>
+    <section id="column1">
+      <ng-container *ngFor="let widget of column1Widgets">
+        <app-table-widget
+          *ngIf="widget.type === WidgetType.Table"
+          [widgetData]="widget"
+          class="widget table"
+        ></app-table-widget>
+        <app-messaging-widget
+          *ngIf="widget.type === WidgetType.Messaging"
+          [widgetData]="widget"
+          class="widget chat"
+        ></app-messaging-widget>
+      </ng-container>
+    </section>
+    <section id="column2">
+      <ng-container *ngFor="let widget of column2Widgets">
+        <app-table-widget
+          *ngIf="widget.type === WidgetType.Table"
+          [widgetData]="widget"
+          class="widget table"
+        ></app-table-widget>
+        <app-messaging-widget
+          *ngIf="widget.type === WidgetType.Messaging"
+          [widgetData]="widget"
+          class="widget chat"
+        ></app-messaging-widget>
+      </ng-container>
+    </section>
     <section id="column3">
-      <div id="column3-widgets"></div>
+      <div id="column3-widgets">
+        <ng-container *ngFor="let widget of column3Widgets">
+          <app-table-widget
+            *ngIf="widget.type === WidgetType.Table"
+            [widgetData]="widget"
+            class="widget table"
+          ></app-table-widget>
+          <app-messaging-widget
+            *ngIf="widget.type === WidgetType.Messaging"
+            [widgetData]="widget"
+            class="widget chat"
+          ></app-messaging-widget>
+        </ng-container>
+      </div>
       <section id="column3-innerSection">
         <article class="widget" id="column3-innerSection-article-topLeft">
           <ol>
@@ -63,11 +102,7 @@
       </div>
     </article>
   </section>
-  <button
-    id="add-new-widget"
-    title="Add new widget"
-    onclick="redirectToWidgetForm()"
-  >
+  <button id="add-new-widget" title="Add new widget" (click)="openDialog()">
     <img src="../../assets/plus.svg" id="plus-icon" />
   </button>
 </div>

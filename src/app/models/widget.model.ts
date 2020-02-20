@@ -9,6 +9,7 @@ export class Widget {
     public type: WidgetType,
     public title: string,
     public headerType: HeaderType,
+    public settings: boolean,
     public data: WidgetData
   ) {}
 }

@@ -1,0 +1,40 @@
+<div
+  class="settings"
+  [ngClass]="{ dark: widgetData.headerType === HeaderType.Dark }"
+>
+  <p>Conversation: {{ widgetData.title }}</p>
+  <div class="settings-icon arrow-bottom"></div>
+</div>
+<div class="messages users">
+  <div
+    class="message"
+    *ngFor="let message of widgetData.data"
+    [ngClass]="{ 'right-side': message.isOnRightSide }"
+  >
+    <figure
+      class="person"
+      [ngClass]="{
+        right: message.isOnRightSide === true,
+        left: message.isOnRightSide === false
+      }"
+    >
+      <img class="person-img" src="{{ message.img }}" />
+    </figure>
+    <div
+      class="message-bubble triangle"
+      [ngClass]="{
+        right: message.isOnRightSide === true,
+        left: message.isOnRightSide === false
+      }"
+    >
+      <p>
+        <strong>{{ message.author }}</strong>
+      </p>
+      <p>{{ message.message }}</p>
+    </div>
+  </div>
+</div>
+<input type="text" placeholder="Type and press enter" class="new-message" />
+<div class="send-btn">
+  <img src="../../../assets/send.svg" class="send-icon" /> Send
+</div>
