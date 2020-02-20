@@ -75,4 +75,13 @@
   >
     {{ buttonAction }}
   </button>
+  <button
+    mat-raised-button
+    color="primary"
+    id="delete-widget"
+    *ngIf="id"
+    (click)="deleteWidget()"
+  >
+    Delete
+  </button>
 </div>

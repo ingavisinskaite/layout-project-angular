@@ -27,7 +27,7 @@ export class AppDataService {
     return this.http.put<Widget>(this.BASE_API_URL + id, data);
   }
 
-  public deleteWidget(id: number): Observable<{}> {
+  public deleteWidget(id: string): Observable<{}> {
     return this.http.delete(this.BASE_API_URL + id);
   }
 }

@@ -52,7 +52,7 @@ export class WidgetFormComponent implements OnInit {
     this.closeDialog();
   }
 
-  public formatWidgetDataObject(e: string) {
+  public formatWidgetDataObject(e: string): Widget {
     this.widgetData = {
       title: this.title,
       column: parseInt(this.column),
@@ -61,5 +61,10 @@ export class WidgetFormComponent implements OnInit {
       settings: parseInt(this.settings),
       data: JSON.parse(this.data)
     };
+    return this.widgetData;
+  }
+
+  public deleteWidget(): void {
+    this.appDataService.deleteWidget(this.id);
   }
 }
