@@ -1,7 +1,8 @@
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { Component, OnInit, Inject } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Widget } from "src/app/models/widget.model";
 import { AppDataService } from "src/app/services/app-data.service";
+import { ActivatedRoute } from "@angular/router";
+import { NavigationService } from "src/app/services/navigation.service";
 
 @Component({
   selector: "app-widget-form",
@@ -11,30 +12,25 @@ import { AppDataService } from "src/app/services/app-data.service";
 export class WidgetFormComponent implements OnInit {
   formTitle: string;
   buttonAction: string;
-  title: string = "";
-  column: string = "";
-  widgetType: string = "";
-  headerType: string = "";
-  settings: string = "";
-  data: string = "[{}]";
-  widgetData: Widget;
+  widget: Widget = new Widget();
+  dataAsString: any;
   id: string = null;
 
   constructor(
-    public dialogRef: MatDialogRef<WidgetFormComponent>,
-    private appDataService: AppDataService
+    private appDataService: AppDataService,
+    private route: ActivatedRoute,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
+    this.id = this.route.snapshot.paramMap.get("id");
     this.checkIfEditOrAddForm();
   }
 
-  public closeDialog(): void {
-    this.dialogRef.close();
-  }
-
-  private checkIfEditOrAddForm() {
+  private checkIfEditOrAddForm(): void {
     if (this.id) {
+      this.getWidgetById(this.id);
       this.formTitle = "Edit widget";
       this.buttonAction = "Edit";
     } else {
@@ -43,28 +39,33 @@ export class WidgetFormComponent implements OnInit {
     }
   }
 
-  public saveWidget() {
+  saveWidget(): void {
+    this.widget.data = JSON.parse(this.dataAsString);
     if (this.id) {
-      console.log("edited");
+      this.appDataService.updateWidget(this.id, this.widget);
     } else {
-      console.log("new added");
+      this.appDataService
+        .addNewWidget(this.widget)
+        .subscribe(widget => console.log(widget));
+      this.navigateToHomepage();
     }
-    this.closeDialog();
   }
 
-  public formatWidgetDataObject(e: string): Widget {
-    this.widgetData = {
-      title: this.title,
-      column: parseInt(this.column),
-      type: parseInt(this.widgetType),
-      headerType: parseInt(this.headerType),
-      settings: parseInt(this.settings),
-      data: JSON.parse(this.data)
-    };
-    return this.widgetData;
+  private getWidgetById(id: string): void {
+    this.appDataService.getWidget(id).subscribe(widget => {
+      this.widget = widget;
+      this.dataAsString = JSON.stringify(widget.data);
+    });
   }
 
-  public deleteWidget(): void {
-    this.appDataService.deleteWidget(this.id);
+  deleteWidget(): void {
+    this.appDataService
+      .deleteWidget(this.id)
+      .subscribe(res => console.log(res));
+    this.navigateToHomepage();
+  }
+
+  navigateToHomepage(): void {
+    this.navigationService.navigateToHomepage();
   }
 }

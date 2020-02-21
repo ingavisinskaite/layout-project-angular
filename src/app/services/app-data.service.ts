@@ -15,7 +15,7 @@ export class AppDataService {
     return this.http.get<Widget[]>(this.BASE_API_URL);
   }
 
-  public getWidget(id: number): Observable<Widget> {
+  public getWidget(id: string): Observable<Widget> {
     return this.http.get<Widget>(this.BASE_API_URL + id);
   }
 

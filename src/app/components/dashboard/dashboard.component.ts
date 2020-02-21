@@ -1,9 +1,9 @@
-import { MatDialog } from "@angular/material/dialog";
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { AppDataService } from "src/app/services/app-data.service";
 import { Widget } from "src/app/models/widget.model";
 import { WidgetType } from "../../models/widget-type.model";
-import { WidgetFormComponent } from "../widget-form/widget-form.component";
+import { NavigationService } from "src/app/services/navigation.service";
 
 @Component({
   selector: "app-dashboard",
@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private appDataService: AppDataService,
-    public dialog: MatDialog
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit(): void {
@@ -28,18 +28,15 @@ export class DashboardComponent implements OnInit {
   private getWidgets(): void {
     this.appDataService.getAllWidgets().subscribe(widgets => {
       this.column1Widgets = widgets.filter(widget => widget.column === 1);
+      console.log(this.column1Widgets);
       this.column2Widgets = widgets.filter(widget => widget.column === 2);
+      console.log(this.column2Widgets);
       this.column3Widgets = widgets.filter(widget => widget.column === 3);
+      console.log(this.column3Widgets);
     });
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(WidgetFormComponent, {
-      width: "550px"
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log("The dialog was closed");
-    });
+  public openWidgetForm(id: number = null): void {
+    this.navigationService.navigateToWidgetForm(id);
   }
 }

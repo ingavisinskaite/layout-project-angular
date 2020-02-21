@@ -1,87 +1,71 @@
-<div id="widget-form" mat-dialog-content>
+<button id="back-button" (click)="navigateToHomepage()">&larr; Go back</button>
+<div id="widget-form">
   <h2 id="form-header">{{ formTitle }}</h2>
-  <mat-form-field id="title" class="field">
-    <mat-label>Title</mat-label>
-    <input
-      matInput
-      [(ngModel)]="title"
-      (ngModelChange)="formatWidgetDataObject($event)"
-    />
-  </mat-form-field>
-  <mat-form-field id="column" class="field">
-    <mat-label>Column number</mat-label>
-    <input
-      matInput
-      type="number"
-      min="1"
-      max="3"
-      [(ngModel)]="column"
-      (ngModelChange)="formatWidgetDataObject($event)"
-    />
-  </mat-form-field>
-  <mat-form-field id="widget-type" class="field">
-    <mat-label>Widget Type</mat-label>
-    <mat-select
-      [(ngModel)]="widgetType"
-      (ngModelChange)="formatWidgetDataObject($event)"
-    >
-      <mat-option value="0">Table</mat-option>
-      <mat-option value="1">Messaging</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field id="header-type" class="field">
-    <mat-label>Header type</mat-label>
-    <mat-select
-      [(ngModel)]="headerType"
-      (ngModelChange)="formatWidgetDataObject($event)"
-    >
-      <mat-option value="0">Light</mat-option>
-      <mat-option value="1">Dark</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field id="settings" class="field">
-    <mat-label>Settings</mat-label>
-    <mat-select
-      [(ngModel)]="settings"
-      (ngModelChange)="formatWidgetDataObject($event)"
-    >
-      <mat-option value="0">No</mat-option>
-      <mat-option value="1">Yes</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field id="data" class="field">
-    <mat-label>Textarea</mat-label>
-    <textarea
-      matInput
-      [(ngModel)]="data"
-      (ngModelChange)="formatWidgetDataObject($event)"
-    ></textarea>
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button
-    mat-raised-button
-    color="primary"
-    id="save-widget"
-    (click)="closeDialog()"
+  <input
+    type="text"
+    placeholder="Title"
+    class="field"
+    id="title"
+    required
+    [(ngModel)]="widget.title"
+    name="title"
+  />
+  <input
+    type="number"
+    placeholder="Column number"
+    min="1"
+    max="3"
+    class="field"
+    id="column-number"
+    required
+    [(ngModel)]="widget.column"
+    name="column"
+  />
+  <select
+    class="field"
+    id="type"
+    required
+    [(ngModel)]="widget.type"
+    name="widgetType"
   >
-    Cancel
-  </button>
-  <button
-    mat-raised-button
-    color="primary"
-    id="save-widget"
-    (click)="saveWidget()"
+    <option value="3" disabled selected hidden>Widget type</option>
+    <option value="0">User list</option>
+    <option value="1">Messages</option>
+  </select>
+  <select
+    class="field"
+    id="header-type"
+    required
+    [(ngModel)]="widget.headerType"
+    name="headerType"
   >
+    <option value="-1" disabled selected hidden>Header type</option>
+    <option value="0">Light</option>
+    <option value="1">Dark</option>
+  </select>
+  <select
+    class="field"
+    id="settings"
+    required
+    [(ngModel)]="widget.settings"
+    name="settings"
+  >
+    <option value="" disabled selected hidden>Settings</option>
+    <option value="0">No</option>
+    <option value="1">Yes</option>
+  </select>
+  <textarea
+    class="field"
+    id="data"
+    placeholder="Widget data in JSON format"
+    required
+    [(ngModel)]="dataAsString"
+    name="data"
+  ></textarea>
+  <button class="field" id="save-widget" (click)="saveWidget()">
     {{ buttonAction }}
   </button>
-  <button
-    mat-raised-button
-    color="primary"
-    id="delete-widget"
-    *ngIf="id"
-    (click)="deleteWidget()"
-  >
+  <button class="field" id="delete-widget" *ngIf="id" (click)="deleteWidget()">
     Delete
   </button>
 </div>

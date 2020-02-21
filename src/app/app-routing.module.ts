@@ -6,7 +6,7 @@ import { WidgetFormComponent } from "./components/widget-form/widget-form.compon
 const routes: Routes = [
   { path: "messaging", component: DashboardComponent },
   { path: "widget-form", component: WidgetFormComponent },
-  { path: "tables", component: DashboardComponent },
+  { path: "widget-form/:id", component: WidgetFormComponent },
   { path: "", component: DashboardComponent }
 ];
 

@@ -1,12 +1,12 @@
-<ng-container *ngIf="widgetData.settings">
-  <div
-    class="settings"
-    [ngClass]="{ dark: widgetData.headerType === HeaderType.Dark }"
-  >
-    <p>Conversation: {{ widgetData.title }}</p>
-    <div class="settings-icon arrow-bottom"></div>
-  </div>
-</ng-container>
+<div
+  class="settings"
+  [ngClass]="{ dark: widgetData.headerType === HeaderType.Dark }"
+  *ngIf="widgetData.settings"
+  (click)="openWidgetForm(widgetData.id)"
+>
+  <p>Conversation: {{ widgetData.title }}</p>
+  <div class="settings-icon arrow-bottom"></div>
+</div>
 <table
   class="table-data"
   [ngClass]="{ 'table-with-settings': widgetData.settings }"
@@ -14,6 +14,7 @@
   <tr
     class="table-header"
     [ngClass]="{ dark: widgetData.headerType === HeaderType.Dark }"
+    (click)="openWidgetForm(widgetData.id)"
   >
     <th>#</th>
     <th>First<br />Name</th>
