@@ -13,10 +13,10 @@ export class Widget {
 
   constructor(
     column?: number,
-    type?: WidgetType,
+    type: WidgetType = -1,
     title?: string,
-    headerType?: HeaderType,
-    settings?: number,
+    headerType: HeaderType = -1,
+    settings: number = -1,
     data?: WidgetData[],
     id?: string
   ) {

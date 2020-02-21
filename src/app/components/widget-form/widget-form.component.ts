@@ -41,8 +41,12 @@ export class WidgetFormComponent implements OnInit {
 
   saveWidget(): void {
     this.widget.data = JSON.parse(this.dataAsString);
+
     if (this.id) {
-      this.appDataService.updateWidget(this.id, this.widget);
+      this.appDataService
+        .updateWidget(this.id, this.widget)
+        .subscribe(data => console.log(data));
+      this.navigateToHomepage();
     } else {
       this.appDataService
         .addNewWidget(this.widget)
