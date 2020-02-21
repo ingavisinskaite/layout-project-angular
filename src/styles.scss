@@ -20,3 +20,14 @@ body {
   border-radius: 10px;
   background-color: #423f3f;
 }
+
+.arrow-bottom::after {
+  content: "";
+  border: solid #bbbbbb;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+  margin-left: 7px;
+  cursor: pointer;
+}

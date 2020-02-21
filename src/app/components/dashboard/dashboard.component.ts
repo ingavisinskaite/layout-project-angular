@@ -16,6 +16,8 @@ export class DashboardComponent implements OnInit {
   column3Widgets: Widget[];
   WidgetType = WidgetType;
   type: any;
+  urlParams: any;
+  widgets: any;
 
   constructor(
     private appDataService: AppDataService,
@@ -24,7 +26,7 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.urlParams = this.route.params.subscribe(params => {
       this.type = params.type;
       if (this.type === "messaging") {
         this.type = WidgetType.Messaging;
@@ -36,14 +38,21 @@ export class DashboardComponent implements OnInit {
   }
 
   private getWidgets(type: number): void {
-    this.appDataService.getAllWidgets(type).subscribe(widgets => {
-      this.column1Widgets = widgets.filter(widget => widget.column === 1);
-      this.column2Widgets = widgets.filter(widget => widget.column === 2);
-      this.column3Widgets = widgets.filter(widget => widget.column === 3);
-    });
+    this.widgets = this.appDataService
+      .getAllWidgets(type)
+      .subscribe(widgets => {
+        this.column1Widgets = widgets.filter(widget => widget.column === 1);
+        this.column2Widgets = widgets.filter(widget => widget.column === 2);
+        this.column3Widgets = widgets.filter(widget => widget.column === 3);
+      });
   }
 
   public openWidgetForm(id: number = null): void {
     this.navigationService.navigateToWidgetForm(id);
+  }
+
+  ngOnDestroy() {
+    this.urlParams.unsubscribe();
+    this.widgets.unsubscribe();
   }
 }
