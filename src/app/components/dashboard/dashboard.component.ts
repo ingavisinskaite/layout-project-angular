@@ -14,10 +14,12 @@ export class DashboardComponent implements OnInit {
   column1Widgets: Widget[];
   column2Widgets: Widget[];
   column3Widgets: Widget[];
+  columns = [];
   WidgetType = WidgetType;
   type: any;
   urlParams: any;
-  widgets: any;
+  widgetsSubscription: any;
+  widgets: Widget[];
 
   constructor(
     private appDataService: AppDataService,
@@ -38,12 +40,14 @@ export class DashboardComponent implements OnInit {
   }
 
   private getWidgets(type: number): void {
-    this.widgets = this.appDataService
+    this.widgetsSubscription = this.appDataService
       .getAllWidgets(type)
       .subscribe(widgets => {
-        this.column1Widgets = widgets.filter(widget => widget.column === 1);
-        this.column2Widgets = widgets.filter(widget => widget.column === 2);
-        this.column3Widgets = widgets.filter(widget => widget.column === 3);
+        this.widgets = widgets;
+        this.widgets.forEach(widget => {
+          if (this.columns.indexOf(widget.column) === -1)
+            this.columns.push(widget.column);
+        });
       });
   }
 
@@ -51,8 +55,8 @@ export class DashboardComponent implements OnInit {
     this.navigationService.navigateToWidgetForm(id);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.urlParams.unsubscribe();
-    this.widgets.unsubscribe();
+    this.widgetsSubscription.unsubscribe();
   }
 }
