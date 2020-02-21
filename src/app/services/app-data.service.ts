@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { Widget } from "../models/widget.model";
+import { WidgetType } from "../models/widget-type.model";
 
 @Injectable({
   providedIn: "root"
@@ -11,8 +12,12 @@ export class AppDataService {
 
   constructor(private http: HttpClient) {}
 
-  public getAllWidgets(): Observable<Widget[]> {
-    return this.http.get<Widget[]>(this.BASE_API_URL);
+  public getAllWidgets(type: number = null): Observable<Widget[]> {
+    if (type === WidgetType.Table || type === WidgetType.Messaging) {
+      return this.http.get<Widget[]>(this.BASE_API_URL + "filter/" + type);
+    } else {
+      return this.http.get<Widget[]>(this.BASE_API_URL);
+    }
   }
 
   public getWidget(id: string): Observable<Widget> {

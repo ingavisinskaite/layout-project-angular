@@ -1,6 +1,7 @@
 <button id="back-button" (click)="navigateToHomepage()">&larr; Go back</button>
 <div id="widget-form">
-  <h2 id="form-header">{{ formTitle }}</h2>
+  <h2 *ngIf="formType === 'edit'">Edit widget</h2>
+  <h2 *ngIf="formType === 'add'">Add new widget</h2>
   <input
     type="text"
     placeholder="Title"
@@ -29,8 +30,12 @@
     name="widgetType"
   >
     <option value="-1" disabled selected hidden>Widget type</option>
-    <option value="0">User list</option>
-    <option value="1">Messages</option>
+    <option
+      *ngFor="let option of widgetTypeOptions; index as i"
+      value="{{ i }}"
+    >
+      {{ option }}</option
+    >
   </select>
   <select
     class="field"
@@ -40,8 +45,12 @@
     name="headerType"
   >
     <option value="-1" disabled selected hidden>Header type</option>
-    <option value="0">Light</option>
-    <option value="1">Dark</option>
+    <option
+      *ngFor="let option of headerTypeOptions; index as i"
+      value="{{ i }}"
+    >
+      {{ option }}</option
+    >
   </select>
   <select
     class="field"
@@ -51,8 +60,9 @@
     name="settings"
   >
     <option value="-1" disabled selected hidden>Settings</option>
-    <option value="0">No</option>
-    <option value="1">Yes</option>
+    <option *ngFor="let option of settingsOptions; index as i" value="{{ i }}">
+      {{ option }}</option
+    >
   </select>
   <textarea
     class="field"
@@ -62,10 +72,22 @@
     [(ngModel)]="dataAsString"
     name="data"
   ></textarea>
-  <button class="field" id="save-widget" (click)="saveWidget()">
-    {{ buttonAction }}
-  </button>
-  <button class="field" id="delete-widget" *ngIf="id" (click)="deleteWidget()">
-    Delete
-  </button>
+  <ng-container *ngIf="formType === 'edit'">
+    <button class="field" id="save-widget" (click)="saveWidget()">
+      Edit
+    </button>
+    <button
+      class="field"
+      id="delete-widget"
+      *ngIf="id"
+      (click)="deleteWidget()"
+    >
+      Delete
+    </button>
+  </ng-container>
+  <ng-container *ngIf="formType === 'add'">
+    <button class="field" id="save-widget" (click)="saveWidget()">
+      Add
+    </button>
+  </ng-container>
 </div>

@@ -58,7 +58,12 @@ $break-mobile: 550px;
         flex: 1 0 70%;
 
         @media screen and (max-width: $break-laptop) {
-          flex: 1 0 25%;
+          flex: 1 0 65%;
+        }
+
+        @media screen and (max-width: $break-tablet) {
+          flex-direction: row;
+          flex-wrap: wrap;
         }
 
         .widget {
@@ -67,18 +72,23 @@ $break-mobile: 550px;
       }
 
       #column3-innerSection {
-        flex: 1 0 auto;
+        flex: 1 0 20%;
         display: flex;
         flex-wrap: wrap;
 
         @media screen and (max-width: $break-tablet) {
-          flex: 1 0 45%;
+          flex: 1 0 auto;
           flex-wrap: wrap;
+        }
+
+        @media screen and (max-width: $break-mobile) {
+          flex: 1 0 30%;
         }
 
         article {
           flex: 1 0 30%;
           max-height: 130px;
+          min-height: 80px;
           color: white;
           display: flex;
           flex-direction: column;
@@ -90,11 +100,11 @@ $break-mobile: 550px;
           }
 
           @media screen and (max-width: $break-tablet) {
-            flex: 1 0 30%;
+            flex: 1 0 33%;
           }
 
           @media screen and (max-width: $break-mobile) {
-            flex: 1 0 45%;
+            min-height: 50px;
           }
         }
 

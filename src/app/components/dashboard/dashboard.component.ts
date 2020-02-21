@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
   column2Widgets: Widget[];
   column3Widgets: Widget[];
   WidgetType = WidgetType;
+  type: any;
 
   constructor(
     private appDataService: AppDataService,
@@ -23,11 +24,19 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getWidgets();
+    this.route.params.subscribe(params => {
+      this.type = params.type;
+      if (this.type === "messaging") {
+        this.type = WidgetType.Messaging;
+      } else if (this.type === "tables") {
+        this.type = WidgetType.Table;
+      }
+      this.getWidgets(this.type);
+    });
   }
 
-  private getWidgets(): void {
-    this.appDataService.getAllWidgets().subscribe(widgets => {
+  private getWidgets(type: number): void {
+    this.appDataService.getAllWidgets(type).subscribe(widgets => {
       this.column1Widgets = widgets.filter(widget => widget.column === 1);
       this.column2Widgets = widgets.filter(widget => widget.column === 2);
       this.column3Widgets = widgets.filter(widget => widget.column === 3);

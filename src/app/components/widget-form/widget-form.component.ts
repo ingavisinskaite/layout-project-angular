@@ -12,6 +12,10 @@ import { NavigationService } from "src/app/services/navigation.service";
 export class WidgetFormComponent implements OnInit {
   formTitle: string;
   buttonAction: string;
+  formType: string;
+  widgetTypeOptions = ["Table", "Messaging"];
+  headerTypeOptions = ["Light", "Dark"];
+  settingsOptions = ["No", "Yes"];
   widget: Widget = new Widget();
   dataAsString: any;
   id: string = null;
@@ -30,12 +34,10 @@ export class WidgetFormComponent implements OnInit {
 
   private checkIfEditOrAddForm(): void {
     if (this.id) {
+      this.formType = "edit";
       this.getWidgetById(this.id);
-      this.formTitle = "Edit widget";
-      this.buttonAction = "Edit";
     } else {
-      this.formTitle = "Add new widget";
-      this.buttonAction = "Add";
+      this.formType = "add";
     }
   }
 

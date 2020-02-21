@@ -10,6 +10,10 @@ $break-mobile: 550px;
   height: 100vh;
   margin-top: 100px;
 
+  @media screen and (max-width: $break-mobile) {
+    margin-top: 30px;
+  }
+
   .field {
     width: 40%;
     height: 50px;
@@ -32,7 +36,7 @@ $break-mobile: 550px;
   }
 
   #data {
-    height: 150px;
+    height: 250px;
     resize: vertical;
   }
 

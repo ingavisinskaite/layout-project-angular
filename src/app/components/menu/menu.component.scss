@@ -43,17 +43,6 @@ $break-tablet: 870px;
     .navbar-projects::before {
       background-position: -407px -271px;
     }
-
-    .arrow-bottom::after {
-      content: "";
-      border: solid #bbbbbb;
-      border-width: 0 3px 3px 0;
-      display: inline-block;
-      padding: 3px;
-      transform: rotate(45deg);
-      margin-left: 7px;
-      cursor: pointer;
-    }
   }
 
   #navbar-search-profile-container {
@@ -79,5 +68,16 @@ $break-tablet: 870px;
       background-image: url("https://media4.s-nbcnews.com/i/newscms/2019_28/2929131/190618-allan-smith-byline1860_e20f6bbeb1d9b2496dd6943f6a3da256.jpg");
       background-size: cover;
     }
+  }
+
+  .arrow-bottom::after {
+    content: "";
+    border: solid #bbbbbb;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    margin-left: 7px;
+    cursor: pointer;
   }
 }
