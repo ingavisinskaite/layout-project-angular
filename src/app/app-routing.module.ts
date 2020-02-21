@@ -4,9 +4,8 @@ import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { WidgetFormComponent } from "./components/widget-form/widget-form.component";
 
 const routes: Routes = [
-  { path: "dashboard/:type", component: DashboardComponent },
   { path: "widget-form", component: WidgetFormComponent },
-  { path: "widget-form", component: WidgetFormComponent },
+  { path: "widget-form/:id", component: WidgetFormComponent },
   { path: "", component: DashboardComponent }
 ];
 
