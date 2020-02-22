@@ -1,14 +1,14 @@
-import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { AppDataService } from "src/app/services/app-data.service";
-import { Widget } from "src/app/models/widget.model";
-import { WidgetType } from "../../models/widget-type.model";
-import { NavigationService } from "src/app/services/navigation.service";
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AppDataService } from 'src/app/services/app-data.service';
+import { Widget } from 'src/app/models/widget.model';
+import { WidgetType } from '../../models/widget-type.model';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
-  selector: "app-dashboard",
-  templateUrl: "./dashboard.component.html",
-  styleUrls: ["./dashboard.component.scss"]
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
   column1Widgets: Widget[];
@@ -28,9 +28,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.urlParams = this.route.params.subscribe(params => {
       this.type = params.type;
-      if (this.type === "messaging") {
+      if (this.type === 'messaging') {
         this.type = WidgetType.Messaging;
-      } else if (this.type === "tables") {
+      } else if (this.type === 'tables') {
         this.type = WidgetType.Table;
       }
       this.getWidgets(this.type);

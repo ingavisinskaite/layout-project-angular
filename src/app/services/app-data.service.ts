@@ -1,20 +1,20 @@
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { HttpClient } from "@angular/common/http";
-import { Widget } from "../models/widget.model";
-import { WidgetType } from "../models/widget-type.model";
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Widget } from '../models/widget.model';
+import { WidgetType } from '../models/widget-type.model';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class AppDataService {
-  BASE_API_URL: string = "http://localhost:3000/widgets/";
+  BASE_API_URL: string = 'http://localhost:3000/widgets/';
 
   constructor(private http: HttpClient) {}
 
   public getAllWidgets(type: number = null): Observable<Widget[]> {
     if (type === WidgetType.Table || type === WidgetType.Messaging) {
-      return this.http.get<Widget[]>(this.BASE_API_URL + "filter/" + type);
+      return this.http.get<Widget[]>(this.BASE_API_URL + 'filter/' + type);
     } else {
       return this.http.get<Widget[]>(this.BASE_API_URL);
     }

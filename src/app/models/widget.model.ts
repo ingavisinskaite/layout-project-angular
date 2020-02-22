@@ -1,6 +1,6 @@
-import { WidgetData } from "./widget-data.model";
-import { HeaderType } from "./header-type.model";
-import { WidgetType } from "./widget-type.model";
+import { WidgetData } from './widget-data.model';
+import { HeaderType } from './header-type.model';
+import { WidgetType } from './widget-type.model';
 
 export class Widget {
   column: number;

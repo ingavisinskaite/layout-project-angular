@@ -1,4 +1,4 @@
-import { WidgetData } from "./widget-data.model";
+import { WidgetData } from './widget-data.model';
 
 export class TableWidgetData extends WidgetData {
   firstName: string;

@@ -8,9 +8,8 @@ describe('TableWidgetComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TableWidgetComponent ]
-    })
-    .compileComponents();
+      declarations: [TableWidgetComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

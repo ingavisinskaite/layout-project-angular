@@ -23,6 +23,7 @@ $break-mobile: 550px;
     font-weight: bold;
     letter-spacing: 2px;
     cursor: pointer;
+    outline: none;
 
     @media screen and (max-width: $break-tablet) {
       flex: 1 0 20%;
@@ -108,16 +109,18 @@ $break-mobile: 550px;
       transition: 0.4s;
     }
 
-    .change .bar1 {
-      transform: rotate(-45deg) translate(-9px, 6px);
-    }
+    .change {
+      .bar1 {
+        transform: rotate(-45deg) translate(-9px, 6px);
+      }
 
-    .change .bar2 {
-      opacity: 0;
-    }
+      .bar2 {
+        opacity: 0;
+      }
 
-    .change .bar3 {
-      transform: rotate(45deg) translate(-8px, -8px);
+      .bar3 {
+        transform: rotate(45deg) translate(-8px, -8px);
+      }
     }
   }
 

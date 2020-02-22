@@ -8,9 +8,8 @@ describe('WidgetFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WidgetFormComponent ]
-    })
-    .compileComponents();
+      declarations: [WidgetFormComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

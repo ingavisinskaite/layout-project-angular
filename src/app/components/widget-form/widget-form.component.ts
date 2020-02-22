@@ -1,21 +1,21 @@
-import { Component, OnInit } from "@angular/core";
-import { Widget } from "src/app/models/widget.model";
-import { AppDataService } from "src/app/services/app-data.service";
-import { ActivatedRoute } from "@angular/router";
-import { NavigationService } from "src/app/services/navigation.service";
+import { Component, OnInit } from '@angular/core';
+import { Widget } from 'src/app/models/widget.model';
+import { AppDataService } from 'src/app/services/app-data.service';
+import { ActivatedRoute } from '@angular/router';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
-  selector: "app-widget-form",
-  templateUrl: "./widget-form.component.html",
-  styleUrls: ["./widget-form.component.scss"]
+  selector: 'app-widget-form',
+  templateUrl: './widget-form.component.html',
+  styleUrls: ['./widget-form.component.scss']
 })
 export class WidgetFormComponent implements OnInit {
   formTitle: string;
   buttonAction: string;
   formType: string;
-  widgetTypeOptions = ["Table", "Messaging"];
-  headerTypeOptions = ["Light", "Dark"];
-  settingsOptions = ["No", "Yes"];
+  widgetTypeOptions = ['Table', 'Messaging'];
+  headerTypeOptions = ['Light', 'Dark'];
+  settingsOptions = ['No', 'Yes'];
   widget: Widget = new Widget();
   dataAsString: any;
   id: string = null;
@@ -28,16 +28,16 @@ export class WidgetFormComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-    this.id = this.route.snapshot.paramMap.get("id");
+    this.id = this.route.snapshot.paramMap.get('id');
     this.checkIfEditOrAddForm();
   }
 
   private checkIfEditOrAddForm(): void {
     if (this.id) {
-      this.formType = "edit";
+      this.formType = 'edit';
       this.getWidgetById(this.id);
     } else {
-      this.formType = "add";
+      this.formType = 'add';
     }
   }
 
