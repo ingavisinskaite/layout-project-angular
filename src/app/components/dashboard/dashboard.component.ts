@@ -32,6 +32,8 @@ export class DashboardComponent implements OnInit {
         this.type = WidgetType.Messaging;
       } else if (this.type === 'tables') {
         this.type = WidgetType.Table;
+      } else {
+        this.type = null;
       }
       this.getWidgets(this.type);
     });

@@ -1,5 +1,5 @@
 <button id="back-button" (click)="navigateToHomepage()">&larr; Go back</button>
-<div id="widget-form">
+<div id="widget-form" [formGroup]="widgetForm">
   <h2>{{ formType === 'edit' ? 'Edit widget' : 'Add new widget' }}</h2>
   <input
     type="text"
@@ -7,8 +7,7 @@
     class="field"
     id="title"
     required
-    [(ngModel)]="widget.title"
-    name="title"
+    formControlName="title"
   />
   <input
     type="number"
@@ -18,40 +17,21 @@
     class="field"
     id="column-number"
     required
-    [(ngModel)]="widget.column"
-    name="column"
+    formControlName="column"
   />
-  <select
-    class="field"
-    id="type"
-    required
-    [(ngModel)]="widget.type"
-    name="widgetType"
-  >
+  <select class="field" id="type" required formControlName="type">
     <option value="-1" disabled selected hidden>Widget type</option>
     <option *ngFor="let option of widgetTypeOptions" value="{{ option }}">
       {{ widgetType[option] }}</option
     >
   </select>
-  <select
-    class="field"
-    id="header-type"
-    required
-    [(ngModel)]="widget.headerType"
-    name="headerType"
-  >
+  <select class="field" id="header-type" required formControlName="headerType">
     <option value="-1" disabled selected hidden>Header type</option>
     <option *ngFor="let option of headerTypeOptions" value="{{ option }}">
       {{ headerType[option] }}</option
     >
   </select>
-  <select
-    class="field"
-    id="settings"
-    required
-    [(ngModel)]="widget.settings"
-    name="settings"
-  >
+  <select class="field" id="settings" required formControlName="settings">
     <option value="-1" disabled selected hidden>Settings</option>
     <option *ngFor="let option of settingsOptions; index as i" value="{{ i }}">
       {{ option }}</option
@@ -62,11 +42,16 @@
     id="data"
     placeholder="Widget data in JSON format"
     required
-    [(ngModel)]="dataAsString"
-    name="data"
+    formControlName="data"
   ></textarea>
   <ng-container *ngIf="formType === 'edit'">
-    <button class="field" id="save-widget" (click)="saveWidget()">
+    <button
+      class="field"
+      id="save-widget"
+      (click)="saveWidget()"
+      [disabled]="!widgetForm.valid"
+      [ngClass]="{ disabled: !widgetForm.valid }"
+    >
       Edit
     </button>
     <button
@@ -79,7 +64,13 @@
     </button>
   </ng-container>
   <ng-container *ngIf="formType === 'add'">
-    <button class="field" id="save-widget" (click)="saveWidget()">
+    <button
+      class="field"
+      id="save-widget"
+      (click)="saveWidget()"
+      [disabled]="!widgetForm.valid"
+      [ngClass]="{ disabled: !widgetForm.valid }"
+    >
       Add
     </button>
   </ng-container>

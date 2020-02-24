@@ -70,6 +70,11 @@ $break-mobile: 550px;
     letter-spacing: 1px;
   }
 
+  #save-widget.disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
+  }
+
   #delete-widget {
     background-color: #b91f1f;
     color: #fff;
