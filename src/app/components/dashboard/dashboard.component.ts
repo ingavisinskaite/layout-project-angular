@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { Widget } from 'src/app/models/widget.model';
 import { WidgetType } from '../../models/widget-type.model';
@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
     this.navigationService.navigateToWidgetForm(id);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.urlParams.unsubscribe();
     this.widgets.unsubscribe();
   }

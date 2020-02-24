@@ -114,14 +114,14 @@ $break-mobile: 550px;
 
         #column3-innerSection-article-topLeft {
           background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-            url("https://thecontextofthings.com/wp-content/uploads/2017/02/easy-work.png")
+            url('https://thecontextofthings.com/wp-content/uploads/2017/02/easy-work.png')
               no-repeat center;
           background-size: cover;
         }
 
         #column3-innerSection-article-topRight {
           background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-            url("https://vortini.com/wp-content/uploads/2018/01/sales-growth-conversion-rates.png")
+            url('https://vortini.com/wp-content/uploads/2018/01/sales-growth-conversion-rates.png')
               no-repeat center;
           background-size: cover;
 
@@ -138,14 +138,14 @@ $break-mobile: 550px;
 
         #column3-innerSection-article-bottomLeft {
           background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-            url("https://designadvisor.net/wp-content/uploads/2018/10/What-is-responsive-web-designadvisor.net_.gif")
+            url('https://designadvisor.net/wp-content/uploads/2018/10/What-is-responsive-web-designadvisor.net_.gif')
               no-repeat center;
           background-size: cover;
         }
 
         #column3-innerSection-article-bottomRight {
           background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-            url("https://www.zend.com/sites/zend/files/image/2019-11/db3eb9bc-01a0-11ea-9f43-008cfa043684_0.jpg")
+            url('https://www.zend.com/sites/zend/files/image/2019-11/db3eb9bc-01a0-11ea-9f43-008cfa043684_0.jpg')
               no-repeat center;
           background-size: cover;
         }
@@ -185,7 +185,7 @@ $break-mobile: 550px;
     }
 
     .statistics::before {
-      content: "";
+      content: '';
       width: 64px;
       height: 64px;
       background-image: url(../../../assets/button-icon-spritesheet.png);
@@ -243,6 +243,7 @@ $break-mobile: 550px;
     display: flex;
     flex-direction: column;
     max-height: 500px;
+    position: relative;
   }
 
   .table {

@@ -14,7 +14,7 @@
 }
 
 .settings-icon::before {
-  content: "";
+  content: '';
   width: 36px;
   height: 36px;
   background-image: url(/assets/icon-spritesheet.png);
@@ -46,6 +46,10 @@
       border-radius: 50%;
     }
 
+    .person {
+      z-index: 2;
+    }
+
     .person.left {
       margin: 0 30px 0 0;
     }
@@ -57,13 +61,20 @@
     .message-bubble {
       position: relative;
       height: auto;
-      background-color: #d3d3d3;
+      background-color: black;
+      color: white;
       border-radius: 5px;
       padding: 5px;
     }
 
+    .message-bubble:not(.right) {
+      z-index: 2;
+      background-color: #d3d3d3;
+      color: black;
+    }
+
     .triangle.left:after {
-      content: " ";
+      content: ' ';
       position: absolute;
       width: 0;
       height: 0;
@@ -76,7 +87,7 @@
     }
 
     .triangle.right:after {
-      content: " ";
+      content: ' ';
       position: absolute;
       width: 0;
       height: 0;
@@ -85,13 +96,30 @@
       top: 10px;
       bottom: auto;
       border: 12px solid;
-      border-color: transparent transparent #d3d3d3 #d3d3d3;
+      border-color: transparent transparent black black;
     }
   }
 
   .right-side {
     flex-direction: row-reverse;
   }
+}
+
+.messages::after {
+  content: '';
+  background: linear-gradient(
+    180deg,
+    rgba(88, 27, 201, 1) 0%,
+    rgba(108, 24, 153, 1) 45%,
+    rgba(205, 19, 210, 1) 100%
+  );
+  position: absolute;
+  left: 0;
+  top: 51px;
+  height: 65%;
+  width: 92%;
+  mix-blend-mode: screen;
+  pointer-events: none;
 }
 
 .new-message {
