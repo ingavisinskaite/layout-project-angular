@@ -1,6 +1,5 @@
-$break-laptop: 1000px;
-$break-tablet: 870px;
-$break-mobile: 550px;
+@import '../../../shared/screens';
+@import '../../../shared/buttons';
 
 #widget-form {
   display: flex;
@@ -61,7 +60,7 @@ $break-mobile: 550px;
   }
 
   #save-widget {
-    background-color: #3d38c3;
+    background-color: $primary-button;
     color: #fff;
     cursor: pointer;
     border: none;
@@ -72,7 +71,7 @@ $break-mobile: 550px;
   }
 
   #save-widget:hover:not(.disabled) {
-    background-color: #3632af;
+    background-color: $primary-button-on-hover;
     transition: ease-in 0.3s;
   }
 
@@ -82,7 +81,7 @@ $break-mobile: 550px;
   }
 
   #delete-widget {
-    background-color: #b91f1f;
+    background-color: $warn-button;
     color: #fff;
     cursor: pointer;
     border: none;
@@ -92,7 +91,7 @@ $break-mobile: 550px;
   }
 
   #delete-widget:hover {
-    background-color: #a61b1b;
+    background-color: $warn-button-on-hover;
     transition: ease-in 0.3s;
   }
 }
@@ -100,7 +99,7 @@ $break-mobile: 550px;
 #back-button {
   float: left;
   margin: 15px;
-  background-color: #3d38c3;
+  background-color: $primary-button;
   color: white;
   border: none;
   width: 100px;
@@ -120,6 +119,6 @@ $break-mobile: 550px;
 }
 
 #back-button:hover {
-  background-color: #3632af;
+  background-color: $primary-button-on-hover;
   transition: ease-in 0.3s;
 }

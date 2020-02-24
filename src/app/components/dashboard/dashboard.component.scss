@@ -1,6 +1,5 @@
-$break-laptop: 1000px;
-$break-tablet: 870px;
-$break-mobile: 550px;
+@import '../../../shared/screens';
+@import '../../../shared/buttons';
 
 #dashboard {
   display: flex;
@@ -258,7 +257,7 @@ $break-mobile: 550px;
     right: 50px;
     bottom: 50px;
     border: none;
-    background-color: #3d38c3;
+    background-color: $primary-button;
     outline: none;
     color: white;
     cursor: pointer;
