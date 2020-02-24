@@ -6,7 +6,6 @@
     placeholder="Title"
     class="field"
     id="title"
-    required
     formControlName="title"
   />
   <input
@@ -16,25 +15,24 @@
     max="3"
     class="field"
     id="column-number"
-    required
     formControlName="column"
   />
-  <select class="field" id="type" required formControlName="type">
+  <select class="field" id="type" formControlName="type">
     <option value="-1" disabled selected hidden>Widget type</option>
-    <option *ngFor="let option of widgetTypeOptions" value="{{ option }}">
+    <option *ngFor="let option of widgetTypeOptions" [value]="option">
       {{ widgetType[option] }}</option
     >
   </select>
-  <select class="field" id="header-type" required formControlName="headerType">
+  <select class="field" id="header-type" formControlName="headerType">
     <option value="-1" disabled selected hidden>Header type</option>
-    <option *ngFor="let option of headerTypeOptions" value="{{ option }}">
+    <option *ngFor="let option of headerTypeOptions" [value]="option">
       {{ headerType[option] }}</option
     >
   </select>
-  <select class="field" id="settings" required formControlName="settings">
+  <select class="field" id="settings" formControlName="settings">
     <option value="-1" disabled selected hidden>Settings</option>
-    <option *ngFor="let option of settingsOptions; index as i" value="{{ i }}">
-      {{ option }}</option
+    <option *ngFor="let option of settingsOptions" [value]="option">
+      {{ settings[option] }}</option
     >
   </select>
   <textarea

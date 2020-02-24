@@ -5,6 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NavigationService } from 'src/app/services/navigation.service';
 import { WidgetType } from 'src/app/models/widget-type.model';
 import { HeaderType } from 'src/app/models/header-type.model';
+import { Settings } from 'src/app/models/settings.model';
 
 @Component({
   selector: 'app-widget-form',
@@ -15,15 +16,12 @@ export class WidgetFormComponent implements OnInit {
   formType: string;
   widgetTypeOptions = this.getEnumValues(WidgetType);
   headerTypeOptions = this.getEnumValues(HeaderType);
-  settingsOptions = ['No', 'Yes'];
+  settingsOptions = this.getEnumValues(Settings);
   id: string = null;
-  editSubscription: any;
-  addSubscription: any;
-  deleteSubscription: any;
-  formWidgetSubscription: any;
 
   widgetType = WidgetType;
   headerType = HeaderType;
+  settings = Settings;
 
   widgetForm = new FormGroup({
     title: new FormControl('', Validators.required),
@@ -69,42 +67,30 @@ export class WidgetFormComponent implements OnInit {
       .get('data')
       .setValue(JSON.parse(this.widgetForm.value.data));
     if (this.id) {
-      this.editSubscription = this.appDataService
+      this.appDataService
         .updateWidget(this.id, this.widgetForm.value)
-        .subscribe(data => console.log(data));
-      this.navigateToHomepage();
+        .subscribe(data => this.navigateToHomepage());
     } else {
-      this.addSubscription = this.appDataService
+      this.appDataService
         .addNewWidget(this.widgetForm.value)
-        .subscribe(widget => console.log(widget));
-      this.navigateToHomepage();
+        .subscribe(widget => this.navigateToHomepage());
     }
   }
 
   private getWidgetById(id: string): void {
-    this.formWidgetSubscription = this.appDataService
-      .getWidget(id)
-      .subscribe(widget => {
-        this.widgetForm.patchValue(widget);
-        this.widgetForm.get('data').setValue(JSON.stringify(widget.data));
-      });
+    this.appDataService.getWidget(id).subscribe(widget => {
+      this.widgetForm.patchValue(widget);
+      this.widgetForm.get('data').setValue(JSON.stringify(widget.data));
+    });
   }
 
   deleteWidget(): void {
-    this.deleteSubscription = this.appDataService
-      .deleteWidget(this.id)
-      .subscribe(res => console.log(res));
-    this.navigateToHomepage();
+    this.appDataService.deleteWidget(this.id).subscribe(res => {
+      this.navigateToHomepage();
+    });
   }
 
   navigateToHomepage(): void {
     this.navigationService.navigateToHomepage();
-  }
-
-  ngOnDestroy(): void {
-    // this.editSubscription.unsubscribe();
-    // this.addSubscription.unsubscribe();
-    // this.deleteSubscription.unsubscribe();
-    // this.formWidgetSubscription.unsubscribe();
   }
 }

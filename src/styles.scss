@@ -4,7 +4,7 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
 ::-webkit-scrollbar-track {
@@ -22,7 +22,7 @@ body {
 }
 
 .arrow-bottom::after {
-  content: "";
+  content: '';
   border: solid #bbbbbb;
   border-width: 0 3px 3px 0;
   display: inline-block;

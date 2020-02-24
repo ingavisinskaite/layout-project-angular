@@ -14,6 +14,7 @@ import { MessagesWidgetComponent } from './components/messaging-widget/messaging
 import { AppDataService } from './services/app-data.service';
 import { WidgetFormComponent } from './components/widget-form/widget-form.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     TableWidgetComponent,
     MessagesWidgetComponent,
     WidgetFormComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

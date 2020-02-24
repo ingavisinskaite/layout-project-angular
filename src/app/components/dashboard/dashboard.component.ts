@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { Widget } from 'src/app/models/widget.model';
@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
   type: any;
   urlParams: any;
   widgets: any;
+  isLoading = true;
 
   constructor(
     private appDataService: AppDataService,
@@ -46,6 +47,7 @@ export class DashboardComponent implements OnInit {
         this.column1Widgets = widgets.filter(widget => widget.column === 1);
         this.column2Widgets = widgets.filter(widget => widget.column === 2);
         this.column3Widgets = widgets.filter(widget => widget.column === 3);
+        this.isLoading = false;
       });
   }
 

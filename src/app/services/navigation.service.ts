@@ -12,7 +12,7 @@ export class NavigationService {
     if (!id) {
       this.router.navigateByUrl('/widget-form');
     } else {
-      this.router.navigateByUrl('/widget-form/' + id);
+      this.router.navigate(['/widget-form', id]);
     }
   }
 
