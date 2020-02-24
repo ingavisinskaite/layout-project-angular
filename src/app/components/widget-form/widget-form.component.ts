@@ -3,6 +3,8 @@ import { Widget } from 'src/app/models/widget.model';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { NavigationService } from 'src/app/services/navigation.service';
+import { WidgetType } from 'src/app/models/widget-type.model';
+import { HeaderType } from 'src/app/models/header-type.model';
 
 @Component({
   selector: 'app-widget-form',
@@ -13,12 +15,19 @@ export class WidgetFormComponent implements OnInit {
   formTitle: string;
   buttonAction: string;
   formType: string;
-  widgetTypeOptions = ['Table', 'Messaging'];
-  headerTypeOptions = ['Light', 'Dark'];
+  widgetTypeOptions = Object.keys(WidgetType).filter(key =>
+    isNaN(WidgetType[key])
+  );
+  headerTypeOptions = Object.keys(HeaderType).filter(key =>
+    isNaN(HeaderType[key])
+  );
   settingsOptions = ['No', 'Yes'];
   widget: Widget = new Widget();
   dataAsString: any;
   id: string = null;
+
+  widgetType = WidgetType;
+  headerType = HeaderType;
 
   constructor(
     private appDataService: AppDataService,

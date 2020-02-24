@@ -1,7 +1,6 @@
 <button id="back-button" (click)="navigateToHomepage()">&larr; Go back</button>
 <div id="widget-form">
-  <h2 *ngIf="formType === 'edit'">Edit widget</h2>
-  <h2 *ngIf="formType === 'add'">Add new widget</h2>
+  <h2>{{ formType === 'edit' ? 'Edit widget' : 'Add new widget' }}</h2>
   <input
     type="text"
     placeholder="Title"
@@ -30,11 +29,8 @@
     name="widgetType"
   >
     <option value="-1" disabled selected hidden>Widget type</option>
-    <option
-      *ngFor="let option of widgetTypeOptions; index as i"
-      value="{{ i }}"
-    >
-      {{ option }}</option
+    <option *ngFor="let option of widgetTypeOptions" value="{{ option }}">
+      {{ widgetType[option] }}</option
     >
   </select>
   <select
@@ -45,11 +41,8 @@
     name="headerType"
   >
     <option value="-1" disabled selected hidden>Header type</option>
-    <option
-      *ngFor="let option of headerTypeOptions; index as i"
-      value="{{ i }}"
-    >
-      {{ option }}</option
+    <option *ngFor="let option of headerTypeOptions" value="{{ option }}">
+      {{ headerType[option] }}</option
     >
   </select>
   <select
