@@ -3,6 +3,7 @@
   [ngClass]="{ dark: widgetData.headerType === HeaderType.Dark }"
   *ngIf="widgetData.settings"
   (click)="openWidgetForm(widgetData.id)"
+  title="Click to edit widget"
 >
   <p>Conversation: {{ widgetData.title }}</p>
   <div class="settings-icon arrow-bottom"></div>
@@ -15,6 +16,7 @@
     class="table-header"
     [ngClass]="{ dark: widgetData.headerType === HeaderType.Dark }"
     (click)="openWidgetForm(widgetData.id)"
+    title="Click to edit widget"
   >
     <th>#</th>
     <th>First<br />Name</th>

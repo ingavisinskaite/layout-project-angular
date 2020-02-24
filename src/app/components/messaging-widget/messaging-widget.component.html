@@ -2,6 +2,7 @@
   class="settings"
   [ngClass]="{ dark: widgetData.headerType === HeaderType.Dark }"
   (click)="openWidgetForm(widgetData.id)"
+  title="Click to edit widget"
 >
   <p>Conversation: {{ widgetData.title }}</p>
   <div class="settings-icon arrow-bottom"></div>

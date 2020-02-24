@@ -9,7 +9,7 @@ $break-tablet: 870px;
   align-items: center;
   position: fixed;
   width: calc(100% - 200px);
-  z-index: 2;
+  z-index: 3;
 
   @media screen and (max-width: $break-tablet) {
     display: none;
@@ -25,7 +25,7 @@ $break-tablet: 870px;
     }
 
     .navbar-dropdown::before {
-      content: "";
+      content: '';
       width: 36px;
       height: 36px;
       background-image: url(/assets/icon-spritesheet.png);
@@ -65,7 +65,7 @@ $break-tablet: 870px;
       width: 32px;
       border-radius: 50%;
       display: inline-block;
-      background-image: url("https://media4.s-nbcnews.com/i/newscms/2019_28/2929131/190618-allan-smith-byline1860_e20f6bbeb1d9b2496dd6943f6a3da256.jpg");
+      background-image: url('https://media4.s-nbcnews.com/i/newscms/2019_28/2929131/190618-allan-smith-byline1860_e20f6bbeb1d9b2496dd6943f6a3da256.jpg');
       background-size: cover;
     }
   }

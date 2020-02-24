@@ -13,6 +13,7 @@ import { TableWidgetComponent } from './components/table-widget/table-widget.com
 import { MessagesWidgetComponent } from './components/messaging-widget/messaging-widget.component';
 import { AppDataService } from './services/app-data.service';
 import { WidgetFormComponent } from './components/widget-form/widget-form.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { WidgetFormComponent } from './components/widget-form/widget-form.compon
     MenuComponent,
     TableWidgetComponent,
     MessagesWidgetComponent,
-    WidgetFormComponent
+    WidgetFormComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
