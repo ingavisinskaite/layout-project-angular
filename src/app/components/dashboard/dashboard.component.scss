@@ -1,12 +1,13 @@
-@import '../../../shared/screens';
-@import '../../../shared/buttons';
+@import '../../scss/screens';
+@import '../../scss/colors';
+@import '../../scss/sizes';
+@import '../../scss/extensions';
 
 #dashboard {
-  display: flex;
-  flex-direction: column;
-  background-color: #d3d3d3;
-  height: calc(100% - 80px);
-  margin-top: 80px;
+  @extend %flex-column;
+  background-color: $grey-light;
+  height: calc(100% - #{$menu-height});
+  margin-top: $menu-height;
 
   @media screen and (max-width: $break-tablet) {
     margin-top: 0;
@@ -24,8 +25,7 @@
     #column2,
     #column3 {
       flex: 1;
-      display: flex;
-      flex-direction: column;
+      @extend %flex-column;
 
       @media screen and (max-width: $break-laptop) {
         flex: 1 0 51%;
@@ -41,8 +41,7 @@
     #column2 {
       .widget {
         flex: 1;
-        display: flex;
-        flex-direction: column;
+        @extend %flex-column;
       }
     }
 
@@ -52,8 +51,7 @@
         flex-direction: row;
       }
       #column3-widgets {
-        display: flex;
-        flex-direction: column;
+        @extend %flex-column;
         flex: 1 0 70%;
 
         @media screen and (max-width: $break-laptop) {
@@ -88,9 +86,8 @@
           flex: 1 0 30%;
           max-height: 130px;
           min-height: 80px;
-          color: #ffffff;
-          display: flex;
-          flex-direction: column;
+          color: $white;
+          @extend %flex-column;
           align-items: center;
           justify-content: center;
 
@@ -163,8 +160,8 @@
       flex: 1 0 22%;
       box-sizing: border-box;
       max-height: 100px;
-      background-color: #423f3f;
-      color: #ffffff;
+      background-color: $grey-dark;
+      color: $white;
       text-align: left;
 
       @media screen and (max-width: $break-laptop) {
@@ -227,20 +224,20 @@
 
   .widget {
     border-radius: 5px;
-    background-color: #ffffff;
+    background-color: $white;
     margin: 7px 10px;
     text-align: center;
-    box-shadow: 0px 0px 13px 1px rgb(153, 153, 153);
+    box-shadow: 0px 0px 13px 1px $grey-shadow;
   }
 
   .widget:hover {
-    box-shadow: 0px 0px 5px 4px #e8e8e8;
+    box-shadow: 0px 0px 5px 4px $grey-shadow-hover;
     transition: box-shadow ease-in-out 0.2s;
   }
 
   .chat {
     display: flex;
-    flex-direction: column;
+    @extend %flex-column;
     max-height: 500px;
     position: relative;
   }
@@ -257,10 +254,11 @@
     right: 50px;
     bottom: 50px;
     border: none;
-    background-color: $primary-button;
+    background-color: $primary;
     outline: none;
-    color: white;
+    color: $white;
     cursor: pointer;
+    z-index: 3;
 
     #plus-icon {
       width: 30px;

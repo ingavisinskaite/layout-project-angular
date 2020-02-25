@@ -1,3 +1,5 @@
+@import '../../scss/colors';
+
 .app-loading {
   position: relative;
   height: 100%;
@@ -19,7 +21,7 @@
       stroke-dashoffset: 0;
       animation: dash 1.5s ease-in-out infinite;
       stroke-linecap: round;
-      stroke: #3f51b5;
+      stroke: $primary;
     }
   }
 }

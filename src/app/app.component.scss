@@ -1,14 +1,16 @@
-$break-tablet: 870px;
+@import './scss/screens';
+@import './scss/sizes';
 
 .homepage {
   display: flex;
+  overflow: hidden;
 
   @media screen and (max-width: $break-tablet) {
     flex-direction: column;
   }
 
   .container {
-    width: calc(100% - 200px);
+    width: calc(100% - #{$sidenav-width});
 
     @media screen and (max-width: $break-tablet) {
       width: 100%;

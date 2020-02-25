@@ -1,10 +1,11 @@
-$break-tablet: 870px;
-$break-mobile: 550px;
+@import '../../scss/screens';
+@import '../../scss/colors';
+@import '../../scss/sizes';
+@import '../../scss/extensions';
 
 #sidenav {
-  min-width: 200px;
-  display: flex;
-  flex-direction: column;
+  min-width: $sidenav-width;
+  @extend %flex-column;
   position: sticky;
   z-index: 2;
 
@@ -18,8 +19,8 @@ $break-mobile: 550px;
     display: flex;
     align-items: center;
     background-color: #2c2a2a;
-    height: 80px;
-    color: white;
+    height: $menu-height;
+    color: $white;
     font-weight: bold;
     letter-spacing: 2px;
     cursor: pointer;
@@ -43,9 +44,9 @@ $break-mobile: 550px;
   }
 
   .links {
-    background-color: #423f3f;
-    color: #ffffff;
-    height: calc(100% - 80px);
+    background-color: $grey-dark;
+    color: $white;
+    height: calc(100% - #{$menu-height});
   }
 
   .desktop {
@@ -87,7 +88,7 @@ $break-mobile: 550px;
 
     @media screen and (max-width: $break-mobile) {
       display: flex;
-      background-color: #423f3f;
+      background-color: $grey-dark;
       flex: 1 0 50%;
       align-items: center;
       justify-content: flex-end;
@@ -104,7 +105,7 @@ $break-mobile: 550px;
     .bar3 {
       width: 35px;
       height: 5px;
-      background-color: #fff;
+      background-color: $white;
       margin: 6px 0;
       transition: 0.4s;
     }
@@ -150,7 +151,7 @@ $break-mobile: 550px;
   }
 
   .link-with-icon::before {
-    content: "";
+    content: '';
     width: 36px;
     height: 36px;
     background-image: url(/assets/icon-spritesheet.png);
@@ -161,7 +162,7 @@ $break-mobile: 550px;
   .link-with-icon a,
   .planet a {
     text-decoration: none;
-    color: #ffffff;
+    color: $white;
     width: 100%;
     padding: 8px 2px;
   }
@@ -207,7 +208,7 @@ $break-mobile: 550px;
   }
 
   .disabled-item {
-    color: #d3d3d3;
+    color: $grey-light;
     cursor: not-allowed;
     opacity: 0.5;
     text-decoration: none;
@@ -225,7 +226,7 @@ $break-mobile: 550px;
     }
 
     .planet::before {
-      content: "";
+      content: '';
       height: 10px;
       border-radius: 50%;
       width: 10px;
@@ -241,7 +242,7 @@ $break-mobile: 550px;
     }
 
     .mercury::before {
-      border: 3px solid #d3d3d3;
+      border: 3px solid $grey-light;
     }
 
     .jupiter::before {
@@ -250,8 +251,8 @@ $break-mobile: 550px;
   }
 
   .arrow-right::after {
-    content: "";
-    border: solid #bbbbbb;
+    content: '';
+    border: solid $grey-light;
     border-width: 0 3px 3px 0;
     display: inline-block;
     padding: 3px;

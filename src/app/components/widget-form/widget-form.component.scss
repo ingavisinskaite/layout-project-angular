@@ -1,9 +1,9 @@
-@import '../../../shared/screens';
-@import '../../../shared/buttons';
+@import '../../scss/screens';
+@import '../../scss/colors';
+@import '../../scss/extensions';
 
 #widget-form {
-  display: flex;
-  flex-direction: column;
+  @extend %flex-column;
   text-align: center;
   align-items: center;
   height: 100vh;
@@ -18,10 +18,10 @@
     height: 50px;
     padding: 5px;
     margin: 2px;
-    border: 1px solid #d8d7db;
+    border: 1px solid $grey-light;
     border-radius: 5px;
     outline: none;
-    box-shadow: 0px 0px 13px 1px rgb(153, 153, 153);
+    box-shadow: 0px 0px 13px 1px $grey-shadow;
 
     @media screen and (max-width: $break-laptop) {
       width: 75%;
@@ -30,7 +30,7 @@
 
   .field:hover,
   .field:focus {
-    box-shadow: 0px 0px 5px 4px #e8e8e8;
+    box-shadow: 0px 0px 5px 4px $grey-shadow-hover;
     transition: box-shadow ease-in-out 0.2s;
   }
 
@@ -55,23 +55,23 @@
   #type,
   #settings {
     option {
-      background-color: #e8e8e8;
+      background-color: $grey-light;
     }
   }
 
   #save-widget {
-    background-color: $primary-button;
-    color: #fff;
+    background-color: $primary;
+    color: $white;
     cursor: pointer;
     border: none;
-    box-shadow: 0px 0px 13px 1px rgb(153, 153, 153);
+    box-shadow: 0px 0px 13px 1px $grey-shadow;
     font-size: 18px;
     letter-spacing: 1px;
     margin-top: 10px;
   }
 
   #save-widget:hover:not(.disabled) {
-    background-color: $primary-button-on-hover;
+    background-color: $primary-hover;
     transition: ease-in 0.3s;
   }
 
@@ -81,17 +81,17 @@
   }
 
   #delete-widget {
-    background-color: $warn-button;
-    color: #fff;
+    background-color: $warn;
+    color: $white;
     cursor: pointer;
     border: none;
-    box-shadow: 0px 0px 13px 1px rgb(153, 153, 153);
+    box-shadow: 0px 0px 13px 1px $grey-shadow;
     font-size: 18px;
     letter-spacing: 1px;
   }
 
   #delete-widget:hover {
-    background-color: $warn-button-on-hover;
+    background-color: $warn-hover;
     transition: ease-in 0.3s;
   }
 }
@@ -99,14 +99,14 @@
 #back-button {
   float: left;
   margin: 15px;
-  background-color: $primary-button;
-  color: white;
+  background-color: $primary;
+  color: $white;
   border: none;
   width: 100px;
   height: 30px;
   border-radius: 5px;
   cursor: pointer;
-  box-shadow: 0px 0px 13px 1px rgb(153, 153, 153);
+  box-shadow: 0px 0px 13px 1px $grey-shadow;
   margin-top: 100px;
 
   @media screen and (max-width: $break-tablet) {
@@ -119,6 +119,6 @@
 }
 
 #back-button:hover {
-  background-color: $primary-button-on-hover;
+  background-color: $primary-hover;
   transition: ease-in 0.3s;
 }

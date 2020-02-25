@@ -1,26 +1,4 @@
-.settings {
-  height: 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 15px;
-  border-bottom: 1px solid #d8d7db;
-  cursor: pointer;
-}
-
-.settings-icon {
-  display: flex;
-  align-items: center;
-}
-
-.settings-icon::before {
-  content: "";
-  width: 36px;
-  height: 36px;
-  background-image: url(/assets/icon-spritesheet.png);
-  background-repeat: no-repeat;
-  background-position: -338px -134px;
-}
+@import '../../scss/colors';
 
 .table-data {
   width: 100%;
@@ -32,19 +10,13 @@
     cursor: pointer;
   }
 
-  .dark {
-    background-color: #423f3f;
-    color: #ffffff;
-    border: none;
-  }
-
   td {
     padding: 5px;
   }
 
   tr {
-    border-top: 1px solid #d8d7db;
-    border-bottom: 1px solid #d8d7db;
+    border-top: 1px solid $grey-light;
+    border-bottom: 1px solid $grey-light;
   }
 
   tr:hover:not(.table-header) {

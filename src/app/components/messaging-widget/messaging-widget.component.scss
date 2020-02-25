@@ -1,34 +1,4 @@
-@import '../../../shared/buttons';
-
-.settings {
-  height: 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 15px;
-  border-bottom: 1px solid #d8d7db;
-  cursor: pointer;
-}
-
-.settings-icon {
-  display: flex;
-  align-items: center;
-}
-
-.settings-icon::before {
-  content: '';
-  width: 36px;
-  height: 36px;
-  background-image: url(/assets/icon-spritesheet.png);
-  background-repeat: no-repeat;
-  background-position: -338px -134px;
-}
-
-.dark {
-  background-color: #423f3f;
-  color: #ffffff;
-  border: none;
-}
+@import '../../scss/colors';
 
 .messages {
   overflow-y: auto;
@@ -63,16 +33,16 @@
     .message-bubble {
       position: relative;
       height: auto;
-      background-color: black;
-      color: white;
+      background-color: $black;
+      color: $white;
       border-radius: 5px;
       padding: 5px;
     }
 
     .message-bubble:not(.right) {
       z-index: 2;
-      background-color: #d3d3d3;
-      color: black;
+      background-color: $grey-light;
+      color: $black;
     }
 
     .triangle.left:after {
@@ -85,7 +55,7 @@
       top: 10px;
       bottom: auto;
       border: 12px solid;
-      border-color: #d3d3d3 #d3d3d3 transparent transparent;
+      border-color: $grey-light $grey-light transparent transparent;
     }
 
     .triangle.right:after {
@@ -98,7 +68,7 @@
       top: 10px;
       bottom: auto;
       border: 12px solid;
-      border-color: transparent transparent black black;
+      border-color: transparent transparent $black $black;
     }
   }
 
@@ -119,13 +89,13 @@
   left: 0;
   top: 51px;
   height: 65%;
-  width: 92%;
+  width: 90%;
   mix-blend-mode: screen;
   pointer-events: none;
 }
 
 .new-message {
-  border: 1px solid #d8d7db;
+  border: 1px solid $grey-light;
   width: 90%;
   height: 60px;
   margin: 10px auto;
@@ -135,16 +105,15 @@
 }
 
 .new-message::placeholder {
-  color: #d8d7db;
+  color: $grey-light;
   opacity: 1;
 }
 
 .send-btn {
   width: 90%;
   height: 50px;
-  color: #ffffff;
-  background-color: $primary-button;
-  border: 1px solid #d8d7db;
+  color: $white;
+  background-color: $primary;
   border-radius: 5px;
   margin: 0 auto 10px auto;
   display: flex;
@@ -160,7 +129,7 @@
 
 .send-btn:hover {
   cursor: pointer;
-  background-color: $primary-button-on-hover;
+  background-color: $primary-hover;
 }
 
 .send-btn:hover .send-icon {
