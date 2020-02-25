@@ -75,7 +75,8 @@
     transition: ease-in 0.3s;
   }
 
-  #save-widget.disabled {
+  #save-widget.disabled,
+  #delete-widget.disabled {
     opacity: 0.65;
     cursor: not-allowed;
   }

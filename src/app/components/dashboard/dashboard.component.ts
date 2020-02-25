@@ -37,6 +37,7 @@ export class DashboardComponent implements OnInit {
       } else {
         this.type = null;
       }
+      window.scrollTo(0, 0);
       this.getWidgets(this.type);
     });
   }

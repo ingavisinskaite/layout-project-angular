@@ -22,6 +22,7 @@ export class WidgetFormComponent implements OnInit, OnDestroy {
   id: string;
   unsubscribeAll = new Subject<any>();
   widgetForm: FormGroup;
+  isLoading = false;
 
   widgetType = WidgetType;
   headerType = HeaderType;
@@ -75,6 +76,7 @@ export class WidgetFormComponent implements OnInit, OnDestroy {
   }
 
   saveWidget(): void {
+    this.isLoading = true;
     this.widgetForm
       .get('data')
       .setValue(JSON.parse(this.widgetForm.value.data));
@@ -94,20 +96,24 @@ export class WidgetFormComponent implements OnInit, OnDestroy {
   }
 
   private getWidgetById(id: string): void {
+    this.isLoading = true;
     this.appDataService
       .getWidget(id)
       .pipe(takeUntil(this.unsubscribeAll))
       .subscribe(widget => {
         this.widgetForm.patchValue(widget);
         this.widgetForm.get('data').setValue(JSON.stringify(widget.data));
+        this.isLoading = false;
       });
   }
 
   deleteWidget(): void {
+    this.isLoading = true;
     this.appDataService
       .deleteWidget(this.id)
       .pipe(takeUntil(this.unsubscribeAll))
-      .subscribe(res => {
+      .subscribe(() => {
+        this.isLoading = false;
         this.navigateToHomepage();
       });
   }

@@ -1,75 +1,85 @@
-<button id="back-button" (click)="navigateToHomepage()">&larr; Go back</button>
-<div id="widget-form" [formGroup]="widgetForm">
-  <h2>{{ formType === 'edit' ? 'Edit widget' : 'Add new widget' }}</h2>
-  <input
-    type="text"
-    placeholder="Title"
-    class="field"
-    id="title"
-    formControlName="title"
-  />
-  <input
-    type="number"
-    placeholder="Column number"
-    min="1"
-    max="3"
-    class="field"
-    id="column-number"
-    formControlName="column"
-  />
-  <select class="field" id="type" formControlName="type">
-    <option value="-1" disabled selected hidden>Widget type</option>
-    <option *ngFor="let option of widgetTypeOptions" [value]="option">
-      {{ widgetType[option] }}</option
-    >
-  </select>
-  <select class="field" id="header-type" formControlName="headerType">
-    <option value="-1" disabled selected hidden>Header type</option>
-    <option *ngFor="let option of headerTypeOptions" [value]="option">
-      {{ headerType[option] }}</option
-    >
-  </select>
-  <select class="field" id="settings" formControlName="settings">
-    <option value="-1" disabled selected hidden>Settings</option>
-    <option *ngFor="let option of settingsOptions" [value]="option">
-      {{ settings[option] }}</option
-    >
-  </select>
-  <textarea
-    class="field"
-    id="data"
-    placeholder="Widget data in JSON format"
-    required
-    formControlName="data"
-  ></textarea>
-  <ng-container *ngIf="formType === 'edit'">
-    <button
+<ng-template #loading>
+  <app-loading-spinner></app-loading-spinner>
+</ng-template>
+
+<ng-container *ngIf="!isLoading; else loading">
+  <button id="back-button" (click)="navigateToHomepage()">
+    &larr; Go back
+  </button>
+  <div id="widget-form" [formGroup]="widgetForm">
+    <h2>{{ formType === 'edit' ? 'Edit widget' : 'Add new widget' }}</h2>
+    <input
+      type="text"
+      placeholder="Title"
       class="field"
-      id="save-widget"
-      (click)="saveWidget()"
-      [disabled]="!widgetForm.valid"
-      [ngClass]="{ disabled: !widgetForm.valid }"
-    >
-      Edit
-    </button>
-    <button
+      id="title"
+      formControlName="title"
+    />
+    <input
+      type="number"
+      placeholder="Column number"
+      min="1"
+      max="3"
       class="field"
-      id="delete-widget"
-      *ngIf="id"
-      (click)="deleteWidget()"
-    >
-      Delete
-    </button>
-  </ng-container>
-  <ng-container *ngIf="formType === 'add'">
-    <button
+      id="column-number"
+      formControlName="column"
+    />
+    <select class="field" id="type" formControlName="type">
+      <option value="-1" disabled selected hidden>Widget type</option>
+      <option *ngFor="let option of widgetTypeOptions" [value]="option">
+        {{ widgetType[option] }}</option
+      >
+    </select>
+    <select class="field" id="header-type" formControlName="headerType">
+      <option value="-1" disabled selected hidden>Header type</option>
+      <option *ngFor="let option of headerTypeOptions" [value]="option">
+        {{ headerType[option] }}</option
+      >
+    </select>
+    <select class="field" id="settings" formControlName="settings">
+      <option value="-1" disabled selected hidden>Settings</option>
+      <option *ngFor="let option of settingsOptions" [value]="option">
+        {{ settings[option] }}</option
+      >
+    </select>
+    <textarea
       class="field"
-      id="save-widget"
-      (click)="saveWidget()"
-      [disabled]="!widgetForm.valid"
-      [ngClass]="{ disabled: !widgetForm.valid }"
-    >
-      Add
-    </button>
-  </ng-container>
-</div>
+      id="data"
+      placeholder="Widget data in JSON format"
+      required
+      formControlName="data"
+    ></textarea>
+    <ng-container *ngIf="formType === 'edit'">
+      <button
+        class="field"
+        id="save-widget"
+        (click)="saveWidget()"
+        [disabled]="!widgetForm.valid || isLoading"
+        [ngClass]="{ disabled: !widgetForm.valid || isLoading }"
+      >
+        Edit
+      </button>
+      <button
+        class="field"
+        id="delete-widget"
+        *ngIf="id"
+        (click)="deleteWidget()"
+        [disabled]="isLoading"
+        [ngClass]="{ disabled: isLoading }"
+      >
+        Delete
+      </button>
+    </ng-container>
+    <ng-container *ngIf="formType === 'add'">
+      <button
+        class="field"
+        id="save-widget"
+        (click)="saveWidget()"
+        [disabled]="!widgetForm.valid || isLoading"
+        [ngClass]="{ disabled: !widgetForm.valid || isLoading }"
+      >
+        Add
+      </button>
+    </ng-container>
+  </div>
+</ng-container>
