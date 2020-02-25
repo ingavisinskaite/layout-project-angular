@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -15,6 +15,7 @@ import { AppDataService } from './services/app-data.service';
 import { WidgetFormComponent } from './components/widget-form/widget-form.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { HttpErrorInterceptor } from './interceptors/http-error-interceptor';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [AppDataService],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

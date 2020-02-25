@@ -4,6 +4,8 @@ import { AppDataService } from 'src/app/services/app-data.service';
 import { Widget } from 'src/app/models/widget.model';
 import { WidgetType } from '../../models/widget-type.model';
 import { NavigationService } from 'src/app/services/navigation.service';
+import { Subscription, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,8 +18,7 @@ export class DashboardComponent implements OnInit {
   column3Widgets: Widget[];
   WidgetType = WidgetType;
   type: any;
-  urlParams: any;
-  widgets: any;
+  unsubscribeAll = new Subject<any>();
   isLoading = true;
 
   constructor(
@@ -27,7 +28,7 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.urlParams = this.route.params.subscribe(params => {
+    this.route.params.pipe(takeUntil(this.unsubscribeAll)).subscribe(params => {
       this.type = params.type;
       if (this.type === 'messaging') {
         this.type = WidgetType.Messaging;
@@ -41,8 +42,10 @@ export class DashboardComponent implements OnInit {
   }
 
   private getWidgets(type: number): void {
-    this.widgets = this.appDataService
+    this.isLoading = true;
+    this.appDataService
       .getAllWidgets(type)
+      .pipe(takeUntil(this.unsubscribeAll))
       .subscribe(widgets => {
         this.column1Widgets = widgets.filter(widget => widget.column === 1);
         this.column2Widgets = widgets.filter(widget => widget.column === 2);
@@ -56,7 +59,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.urlParams.unsubscribe();
-    this.widgets.unsubscribe();
+    this.unsubscribeAll.next();
+    this.unsubscribeAll.complete();
   }
 }

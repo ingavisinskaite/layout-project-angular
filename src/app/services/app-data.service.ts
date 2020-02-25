@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Widget } from '../models/widget.model';
 import { WidgetType } from '../models/widget-type.model';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,12 @@ export class AppDataService {
   }
 
   public updateWidget(id: string, data: Widget): Observable<Widget> {
-    return this.http.put<Widget>(this.BASE_API_URL + id, data);
+    return this.http.put<Widget>(this.BASE_API_URL + id, data).pipe(
+      catchError(err => {
+        console.log(err);
+        return throwError(err);
+      })
+    );
   }
 
   public deleteWidget(id: string): Observable<{}> {
