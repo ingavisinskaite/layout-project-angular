@@ -25,7 +25,7 @@ export class AppDataService {
     return this.http.get<Widget>(this.BASE_API_URL + id);
   }
 
-  public addNewWidget(data: Widget): Observable<Widget> {
+  public createWidget(data: Widget): Observable<Widget> {
     return this.http.post<Widget>(this.BASE_API_URL, data);
   }
 

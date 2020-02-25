@@ -8,6 +8,7 @@ import { NavigationService } from 'src/app/services/navigation.service';
 import { WidgetType } from 'src/app/models/widget-type.model';
 import { HeaderType } from 'src/app/models/header-type.model';
 import { Settings } from 'src/app/models/settings.model';
+import { FormType } from 'src/app/models/form-type.model';
 
 @Component({
   selector: 'app-widget-form',
@@ -15,7 +16,6 @@ import { Settings } from 'src/app/models/settings.model';
   styleUrls: ['./widget-form.component.scss']
 })
 export class WidgetFormComponent implements OnInit, OnDestroy {
-  formType: string;
   widgetTypeOptions = this.getEnumValues(WidgetType);
   headerTypeOptions = this.getEnumValues(HeaderType);
   settingsOptions = this.getEnumValues(Settings);
@@ -23,10 +23,12 @@ export class WidgetFormComponent implements OnInit, OnDestroy {
   unsubscribeAll = new Subject<any>();
   widgetForm: FormGroup;
   isLoading = false;
+  type: number;
 
   widgetType = WidgetType;
   headerType = HeaderType;
   settings = Settings;
+  formType = FormType;
 
   constructor(
     private appDataService: AppDataService,
@@ -68,10 +70,10 @@ export class WidgetFormComponent implements OnInit, OnDestroy {
 
   private checkIfEditOrAddForm(): void {
     if (this.id) {
-      this.formType = 'edit';
+      this.type = FormType.Edit;
       this.getWidgetById(this.id);
     } else {
-      this.formType = 'add';
+      this.type = FormType.Add;
     }
   }
 
@@ -80,11 +82,11 @@ export class WidgetFormComponent implements OnInit, OnDestroy {
     this.widgetForm
       .get('data')
       .setValue(JSON.parse(this.widgetForm.value.data));
-    const saveWidgetObservable = this.id
+    const saveWidgetObservable$ = this.id
       ? this.appDataService.updateWidget(this.id, this.widgetForm.value)
-      : this.appDataService.addNewWidget(this.widgetForm.value);
+      : this.appDataService.createWidget(this.widgetForm.value);
 
-    saveWidgetObservable.pipe(takeUntil(this.unsubscribeAll)).subscribe(() => {
+    saveWidgetObservable$.pipe(takeUntil(this.unsubscribeAll)).subscribe(() => {
       this.navigateToHomepage();
     });
   }

@@ -7,7 +7,7 @@
     &larr; Go back
   </button>
   <div id="widget-form" [formGroup]="widgetForm">
-    <h2>{{ formType === 'edit' ? 'Edit widget' : 'Add new widget' }}</h2>
+    <h2>{{ type ? 'Edit widget' : 'Add new widget' }}</h2>
     <input
       type="text"
       placeholder="Title"
@@ -49,7 +49,7 @@
       required
       formControlName="data"
     ></textarea>
-    <ng-container *ngIf="formType === 'edit'">
+    <ng-container *ngIf="type">
       <button
         class="field"
         id="save-widget"
@@ -70,7 +70,7 @@
         Delete
       </button>
     </ng-container>
-    <ng-container *ngIf="formType === 'add'">
+    <ng-container *ngIf="!type">
       <button
         class="field"
         id="save-widget"

@@ -42,6 +42,11 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.unsubscribeAll.next();
+    this.unsubscribeAll.complete();
+  }
+
   private getWidgets(type: number): void {
     this.isLoading = true;
     this.appDataService
@@ -57,10 +62,5 @@ export class DashboardComponent implements OnInit {
 
   public openWidgetForm(id: number = null): void {
     this.navigationService.navigateToWidgetForm(id);
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribeAll.next();
-    this.unsubscribeAll.complete();
   }
 }
