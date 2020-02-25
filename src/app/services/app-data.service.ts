@@ -30,12 +30,7 @@ export class AppDataService {
   }
 
   public updateWidget(id: string, data: Widget): Observable<Widget> {
-    return this.http.put<Widget>(this.BASE_API_URL + id, data).pipe(
-      catchError(err => {
-        console.log(err);
-        return throwError(err);
-      })
-    );
+    return this.http.put<Widget>(this.BASE_API_URL + id, data);
   }
 
   public deleteWidget(id: string): Observable<{}> {

@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AppDataService } from 'src/app/services/app-data.service';
 import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AppDataService } from 'src/app/services/app-data.service';
 import { NavigationService } from 'src/app/services/navigation.service';
 import { WidgetType } from 'src/app/models/widget-type.model';
 import { HeaderType } from 'src/app/models/header-type.model';
 import { Settings } from 'src/app/models/settings.model';
-import { Subject, throwError, Observable } from 'rxjs';
-import { takeUntil, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-widget-form',
@@ -84,15 +84,9 @@ export class WidgetFormComponent implements OnInit, OnDestroy {
       ? this.appDataService.updateWidget(this.id, this.widgetForm.value)
       : this.appDataService.addNewWidget(this.widgetForm.value);
 
-    saveWidgetObservable
-      .pipe(
-        takeUntil(this.unsubscribeAll),
-        catchError(err => {
-          console.log(err);
-          return throwError(err);
-        })
-      )
-      .subscribe(() => this.navigateToHomepage());
+    saveWidgetObservable.pipe(takeUntil(this.unsubscribeAll)).subscribe(() => {
+      this.navigateToHomepage();
+    });
   }
 
   private getWidgetById(id: string): void {
@@ -113,7 +107,6 @@ export class WidgetFormComponent implements OnInit, OnDestroy {
       .deleteWidget(this.id)
       .pipe(takeUntil(this.unsubscribeAll))
       .subscribe(() => {
-        this.isLoading = false;
         this.navigateToHomepage();
       });
   }

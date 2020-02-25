@@ -1,7 +1,4 @@
-@import '../../scss/screens';
-@import '../../scss/colors';
-@import '../../scss/sizes';
-@import '../../scss/extensions';
+@import '../../scss/index';
 
 #dashboard {
   @extend %flex-column;
@@ -236,7 +233,6 @@
   }
 
   .chat {
-    display: flex;
     @extend %flex-column;
     max-height: 500px;
     position: relative;
