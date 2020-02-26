@@ -17,6 +17,7 @@ import { WidgetFormComponent } from './components/widget-form/widget-form.compon
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { HttpErrorInterceptor } from './interceptors/http-error-interceptor';
+import { LoaderInterceptor } from './interceptors/loading-interceptor';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { HttpErrorInterceptor } from './interceptors/http-error-interceptor';
     BrowserAnimationsModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

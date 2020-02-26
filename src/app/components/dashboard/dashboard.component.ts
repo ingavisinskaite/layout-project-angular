@@ -24,8 +24,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private appDataService: AppDataService,
     private navigationService: NavigationService,
-    private route: ActivatedRoute,
-    private loadingService: LoadingService
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +34,6 @@ export class DashboardComponent implements OnInit {
   ngOnDestroy(): void {
     this.unsubscribeAll.next();
     this.unsubscribeAll.complete();
-    this.loadingService.show();
   }
 
   openWidgetForm(id: number = null): void {
@@ -43,12 +41,10 @@ export class DashboardComponent implements OnInit {
   }
 
   private getWidgets(type: number): void {
-    this.loadingService.show();
     this.appDataService
       .getAllWidgets(type)
       .pipe(
         catchError(err => {
-          this.loadingService.hide();
           return throwError(err);
         })
       )
@@ -56,7 +52,6 @@ export class DashboardComponent implements OnInit {
         this.column1Widgets = widgets.filter(widget => widget.column === 1);
         this.column2Widgets = widgets.filter(widget => widget.column === 2);
         this.column3Widgets = widgets.filter(widget => widget.column === 3);
-        this.loadingService.hide();
       });
   }
 

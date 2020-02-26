@@ -40,23 +40,16 @@ export class WidgetFormComponent implements OnInit {
   constructor(
     private appDataService: AppDataService,
     private route: ActivatedRoute,
-    private navigationService: NavigationService,
-    private loadingService: LoadingService
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
-    setTimeout(() => {
-      if (!this.id) {
-        this.loadingService.hide();
-      }
-    });
     this.checkIfEditOrAddForm();
     this.widgetForm = this.createWidgetForm();
   }
 
   saveWidget(): void {
-    this.loadingService.show();
     this.widgetForm
       .get('data')
       .setValue(JSON.parse(this.widgetForm.value.data));
@@ -68,7 +61,6 @@ export class WidgetFormComponent implements OnInit {
       .pipe(
         catchError(err => {
           this.widgetForm.reset(this.defaultWidgetFormValues);
-          this.loadingService.hide();
           return throwError(err);
         })
       )
@@ -78,12 +70,10 @@ export class WidgetFormComponent implements OnInit {
   }
 
   deleteWidget(): void {
-    this.loadingService.show();
     this.appDataService
       .deleteWidget(this.id)
       .pipe(
         catchError(err => {
-          this.loadingService.hide();
           return throwError(err);
         })
       )
@@ -126,12 +116,10 @@ export class WidgetFormComponent implements OnInit {
   }
 
   private getWidgetById(id: string): void {
-    this.loadingService.show();
     this.appDataService
       .getWidget(id)
       .pipe(
         catchError(err => {
-          this.loadingService.hide();
           return throwError(err);
         })
       )
@@ -139,7 +127,6 @@ export class WidgetFormComponent implements OnInit {
         this.widgetForm.patchValue(widget);
         this.widgetForm.get('data').setValue(JSON.stringify(widget.data));
         this.defaultWidgetFormValues = this.widgetForm.value;
-        this.loadingService.hide();
       });
   }
 }

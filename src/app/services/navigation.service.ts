@@ -23,6 +23,5 @@ export class NavigationService {
 
   public navigateToHomepage(): void {
     this.location.back();
-    this.loadingService.show();
   }
 }
