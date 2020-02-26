@@ -5,3 +5,6 @@
     <router-outlet></router-outlet>
   </div>
 </main>
+<div class="spinner-wrapper" *ngIf="loadingService.isLoading">
+  <app-loading-spinner class="loading-spinner"></app-loading-spinner>
+</div>

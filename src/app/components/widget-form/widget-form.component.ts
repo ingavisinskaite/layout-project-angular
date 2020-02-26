@@ -9,6 +9,7 @@ import { WidgetType } from 'src/app/models/widget-type.model';
 import { HeaderType } from 'src/app/models/header-type.model';
 import { Settings } from 'src/app/models/settings.model';
 import { FormType } from 'src/app/models/form-type.model';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-widget-form',
@@ -21,7 +22,6 @@ export class WidgetFormComponent implements OnInit {
   settingsOptions = this.getEnumValues(Settings);
   id: string;
   widgetForm: FormGroup;
-  isLoading = false;
   formType: number;
   defaultWidgetFormValues = {
     title: '',
@@ -40,18 +40,23 @@ export class WidgetFormComponent implements OnInit {
   constructor(
     private appDataService: AppDataService,
     private route: ActivatedRoute,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    private loadingService: LoadingService
   ) {}
 
   ngOnInit(): void {
-    window.scrollTo(0, 0);
     this.id = this.route.snapshot.paramMap.get('id');
+    setTimeout(() => {
+      if (!this.id) {
+        this.loadingService.hide();
+      }
+    });
     this.checkIfEditOrAddForm();
     this.widgetForm = this.createWidgetForm();
   }
 
   saveWidget(): void {
-    this.isLoading = true;
+    this.loadingService.show();
     this.widgetForm
       .get('data')
       .setValue(JSON.parse(this.widgetForm.value.data));
@@ -63,7 +68,7 @@ export class WidgetFormComponent implements OnInit {
       .pipe(
         catchError(err => {
           this.widgetForm.reset(this.defaultWidgetFormValues);
-          this.isLoading = false;
+          this.loadingService.hide();
           return throwError(err);
         })
       )
@@ -73,12 +78,12 @@ export class WidgetFormComponent implements OnInit {
   }
 
   deleteWidget(): void {
-    this.isLoading = true;
+    this.loadingService.show();
     this.appDataService
       .deleteWidget(this.id)
       .pipe(
         catchError(err => {
-          this.isLoading = false;
+          this.loadingService.hide();
           return throwError(err);
         })
       )
@@ -121,12 +126,12 @@ export class WidgetFormComponent implements OnInit {
   }
 
   private getWidgetById(id: string): void {
-    this.isLoading = true;
+    this.loadingService.show();
     this.appDataService
       .getWidget(id)
       .pipe(
         catchError(err => {
-          this.isLoading = false;
+          this.loadingService.hide();
           return throwError(err);
         })
       )
@@ -134,7 +139,7 @@ export class WidgetFormComponent implements OnInit {
         this.widgetForm.patchValue(widget);
         this.widgetForm.get('data').setValue(JSON.stringify(widget.data));
         this.defaultWidgetFormValues = this.widgetForm.value;
-        this.isLoading = false;
+        this.loadingService.hide();
       });
   }
 }

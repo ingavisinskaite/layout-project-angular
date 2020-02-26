@@ -1,7 +1,4 @@
-<ng-template #loading>
-  <app-loading-spinner></app-loading-spinner>
-</ng-template>
-<div id="dashboard" *ngIf="!isLoading; else loading">
+<div id="dashboard">
   <div id="columns">
     <section id="column1">
       <ng-container *ngFor="let widget of column1Widgets">

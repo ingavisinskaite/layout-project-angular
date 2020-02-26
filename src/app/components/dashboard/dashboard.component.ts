@@ -4,8 +4,9 @@ import { AppDataService } from 'src/app/services/app-data.service';
 import { Widget } from 'src/app/models/widget.model';
 import { WidgetType } from '../../models/widget-type.model';
 import { NavigationService } from 'src/app/services/navigation.service';
-import { Subscription, Subject, throwError } from 'rxjs';
+import { Subject, throwError } from 'rxjs';
 import { takeUntil, catchError } from 'rxjs/operators';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,15 +20,47 @@ export class DashboardComponent implements OnInit {
   WidgetType = WidgetType;
   type: any;
   unsubscribeAll = new Subject<any>();
-  isLoading = true;
 
   constructor(
     private appDataService: AppDataService,
     private navigationService: NavigationService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private loadingService: LoadingService
   ) {}
 
   ngOnInit(): void {
+    this.getFilterType();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribeAll.next();
+    this.unsubscribeAll.complete();
+    this.loadingService.show();
+  }
+
+  openWidgetForm(id: number = null): void {
+    this.navigationService.navigateToWidgetForm(id);
+  }
+
+  private getWidgets(type: number): void {
+    this.loadingService.show();
+    this.appDataService
+      .getAllWidgets(type)
+      .pipe(
+        catchError(err => {
+          this.loadingService.hide();
+          return throwError(err);
+        })
+      )
+      .subscribe(widgets => {
+        this.column1Widgets = widgets.filter(widget => widget.column === 1);
+        this.column2Widgets = widgets.filter(widget => widget.column === 2);
+        this.column3Widgets = widgets.filter(widget => widget.column === 3);
+        this.loadingService.hide();
+      });
+  }
+
+  private getFilterType() {
     this.route.params.pipe(takeUntil(this.unsubscribeAll)).subscribe(params => {
       this.type = params.type;
       if (this.type === 'messaging') {
@@ -37,35 +70,7 @@ export class DashboardComponent implements OnInit {
       } else {
         this.type = null;
       }
-      window.scrollTo(0, 0);
       this.getWidgets(this.type);
     });
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribeAll.next();
-    this.unsubscribeAll.complete();
-  }
-
-  private getWidgets(type: number): void {
-    this.isLoading = true;
-    this.appDataService
-      .getAllWidgets(type)
-      .pipe(
-        catchError(err => {
-          this.isLoading = false;
-          return throwError(err);
-        })
-      )
-      .subscribe(widgets => {
-        this.column1Widgets = widgets.filter(widget => widget.column === 1);
-        this.column2Widgets = widgets.filter(widget => widget.column === 2);
-        this.column3Widgets = widgets.filter(widget => widget.column === 3);
-        this.isLoading = false;
-      });
-  }
-
-  public openWidgetForm(id: number = null): void {
-    this.navigationService.navigateToWidgetForm(id);
   }
 }

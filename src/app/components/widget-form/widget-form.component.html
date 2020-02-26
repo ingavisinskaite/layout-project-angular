@@ -1,15 +1,5 @@
-<!-- <ng-template #loading>
-  <app-loading-spinner></app-loading-spinner>
-</ng-template> -->
-
-<!-- <ng-container *ngIf="!isLoading; else loading"> -->
 <div class="widget-form-container">
-  <button
-    id="back-button"
-    (click)="navigateToHomepage()"
-    [ngClass]="{ disabled: isLoading }"
-    [disabled]="isLoading"
-  >
+  <button id="back-button" (click)="navigateToHomepage()">
     &larr; Go back
   </button>
   <div id="widget-form" [formGroup]="widgetForm">
@@ -60,8 +50,8 @@
         class="field"
         id="save-widget"
         (click)="saveWidget()"
-        [disabled]="!widgetForm.valid || isLoading"
-        [ngClass]="{ disabled: !widgetForm.valid || isLoading }"
+        [disabled]="!widgetForm.valid"
+        [ngClass]="{ disabled: !widgetForm.valid }"
       >
         Edit
       </button>
@@ -70,8 +60,6 @@
         id="delete-widget"
         *ngIf="id"
         (click)="deleteWidget()"
-        [disabled]="isLoading"
-        [ngClass]="{ disabled: isLoading }"
       >
         Delete
       </button>
@@ -81,12 +69,11 @@
         class="field"
         id="save-widget"
         (click)="saveWidget()"
-        [disabled]="!widgetForm.valid || isLoading"
-        [ngClass]="{ disabled: !widgetForm.valid || isLoading }"
+        [disabled]="!widgetForm.valid"
+        [ngClass]="{ disabled: !widgetForm.valid }"
       >
         Add
       </button>
     </ng-container>
   </div>
 </div>
-<!-- </ng-container> -->

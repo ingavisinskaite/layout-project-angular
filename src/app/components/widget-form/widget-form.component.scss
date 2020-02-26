@@ -1,131 +1,130 @@
 @import '../../scss/index';
 
 .widget-form-container {
-  display: flex;
-  flex-direction: column;
-}
-#widget-form {
   @extend %flex-column;
-  text-align: center;
-  align-items: center;
-  height: 100vh;
+  #widget-form {
+    @extend %flex-column;
+    text-align: center;
+    align-items: center;
+    height: 100vh;
 
-  @media screen and (max-width: $break-mobile) {
-    margin-top: 30px;
-  }
+    @media screen and (max-width: $break-mobile) {
+      margin-top: 30px;
+    }
 
-  .field {
-    width: $field-width-desktop;
-    height: 50px;
-    padding: 5px;
-    margin: 2px;
-    border: 1px solid $grey-light;
-    border-radius: 5px;
-    outline: none;
-    box-shadow: 0px 0px 13px 1px $grey-shadow;
+    .field {
+      width: $field-width-desktop;
+      height: 50px;
+      padding: 5px;
+      margin: 2px;
+      border: 1px solid $grey-light;
+      border-radius: 5px;
+      outline: none;
+      box-shadow: 0px 0px 13px 1px $grey-shadow;
 
-    @media screen and (max-width: $break-laptop) {
-      width: $field-width-laptop;
+      @media screen and (max-width: $break-laptop) {
+        width: $field-width-laptop;
+      }
+    }
+
+    .field:hover,
+    .field:focus {
+      box-shadow: 0px 0px 5px 4px $grey-shadow-hover;
+      transition: box-shadow ease-in-out 0.2s;
+    }
+
+    #data {
+      height: 250px;
+      resize: vertical;
+    }
+
+    #header-type,
+    #type,
+    #save-widget,
+    #delete-widget,
+    #settings {
+      width: calc(#{$field-width-desktop} + #{$field-padding});
+
+      @media screen and (max-width: $break-laptop) {
+        width: calc(#{$field-width-laptop} + #{$field-padding});
+      }
+    }
+
+    #header-type,
+    #type,
+    #settings {
+      option {
+        background-color: $grey-light;
+      }
+    }
+
+    #save-widget {
+      background-color: $primary;
+      color: $white;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0px 0px 13px 1px $grey-shadow;
+      font-size: 18px;
+      letter-spacing: 1px;
+      margin-top: 10px;
+    }
+
+    #save-widget:hover:not(.disabled) {
+      background-color: $primary-hover;
+      transition: ease-in 0.3s;
+    }
+
+    #save-widget.disabled,
+    #delete-widget.disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    #delete-widget {
+      background-color: $warn;
+      color: $white;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0px 0px 13px 1px $grey-shadow;
+      font-size: 18px;
+      letter-spacing: 1px;
+    }
+
+    #delete-widget:hover {
+      background-color: $warn-hover;
+      transition: ease-in 0.3s;
     }
   }
 
-  .field:hover,
-  .field:focus {
-    box-shadow: 0px 0px 5px 4px $grey-shadow-hover;
-    transition: box-shadow ease-in-out 0.2s;
-  }
-
-  #data {
-    height: 250px;
-    resize: vertical;
-  }
-
-  #header-type,
-  #type,
-  #save-widget,
-  #delete-widget,
-  #settings {
-    width: calc(#{$field-width-desktop} + #{$field-padding});
-
-    @media screen and (max-width: $break-laptop) {
-      width: calc(#{$field-width-laptop} + #{$field-padding});
-    }
-  }
-
-  #header-type,
-  #type,
-  #settings {
-    option {
-      background-color: $grey-light;
-    }
-  }
-
-  #save-widget {
+  #back-button {
+    float: left;
+    margin: 15px;
     background-color: $primary;
     color: $white;
-    cursor: pointer;
     border: none;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
     box-shadow: 0px 0px 13px 1px $grey-shadow;
-    font-size: 18px;
-    letter-spacing: 1px;
-    margin-top: 10px;
+    margin-top: 100px;
+
+    @media screen and (max-width: $break-tablet) {
+      margin-top: 30px;
+    }
+
+    @media screen and (max-width: $break-mobile) {
+      display: none;
+    }
   }
 
-  #save-widget:hover:not(.disabled) {
-    background-color: $primary-hover;
-    transition: ease-in 0.3s;
-  }
-
-  #save-widget.disabled,
-  #delete-widget.disabled {
+  #back-button.disabled {
     opacity: 0.65;
     cursor: not-allowed;
   }
 
-  #delete-widget {
-    background-color: $warn;
-    color: $white;
-    cursor: pointer;
-    border: none;
-    box-shadow: 0px 0px 13px 1px $grey-shadow;
-    font-size: 18px;
-    letter-spacing: 1px;
-  }
-
-  #delete-widget:hover {
-    background-color: $warn-hover;
+  #back-button:hover {
+    background-color: $primary-hover;
     transition: ease-in 0.3s;
   }
-}
-
-#back-button {
-  float: left;
-  margin: 15px;
-  background-color: $primary;
-  color: $white;
-  border: none;
-  width: 100px;
-  height: 30px;
-  border-radius: 5px;
-  cursor: pointer;
-  box-shadow: 0px 0px 13px 1px $grey-shadow;
-  margin-top: 100px;
-
-  @media screen and (max-width: $break-tablet) {
-    margin-top: 30px;
-  }
-
-  @media screen and (max-width: $break-mobile) {
-    display: none;
-  }
-}
-
-#back-button.disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
-}
-
-#back-button:hover {
-  background-color: $primary-hover;
-  transition: ease-in 0.3s;
 }
