@@ -1,11 +1,14 @@
 @import '../../scss/index';
 
+.widget-form-container {
+  display: flex;
+  flex-direction: column;
+}
 #widget-form {
   @extend %flex-column;
   text-align: center;
   align-items: center;
   height: 100vh;
-  margin-top: 100px;
 
   @media screen and (max-width: $break-mobile) {
     margin-top: 30px;
@@ -115,6 +118,11 @@
   @media screen and (max-width: $break-mobile) {
     display: none;
   }
+}
+
+#back-button.disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
 }
 
 #back-button:hover {

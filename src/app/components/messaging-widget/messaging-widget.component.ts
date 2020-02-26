@@ -16,7 +16,7 @@ export class MessagesWidgetComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  public openWidgetForm(id: string = null): void {
+  openWidgetForm(id: string = null): void {
     this.navigationService.navigateToWidgetForm(id);
   }
 }

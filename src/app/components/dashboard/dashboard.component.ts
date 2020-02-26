@@ -4,8 +4,8 @@ import { AppDataService } from 'src/app/services/app-data.service';
 import { Widget } from 'src/app/models/widget.model';
 import { WidgetType } from '../../models/widget-type.model';
 import { NavigationService } from 'src/app/services/navigation.service';
-import { Subscription, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subscription, Subject, throwError } from 'rxjs';
+import { takeUntil, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -51,7 +51,12 @@ export class DashboardComponent implements OnInit {
     this.isLoading = true;
     this.appDataService
       .getAllWidgets(type)
-      .pipe(takeUntil(this.unsubscribeAll))
+      .pipe(
+        catchError(err => {
+          this.isLoading = false;
+          return throwError(err);
+        })
+      )
       .subscribe(widgets => {
         this.column1Widgets = widgets.filter(widget => widget.column === 1);
         this.column2Widgets = widgets.filter(widget => widget.column === 2);

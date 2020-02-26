@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppDataService } from 'src/app/services/app-data.service';
 import { NavigationService } from 'src/app/services/navigation.service';
@@ -15,20 +15,27 @@ import { FormType } from 'src/app/models/form-type.model';
   templateUrl: './widget-form.component.html',
   styleUrls: ['./widget-form.component.scss']
 })
-export class WidgetFormComponent implements OnInit, OnDestroy {
+export class WidgetFormComponent implements OnInit {
   widgetTypeOptions = this.getEnumValues(WidgetType);
   headerTypeOptions = this.getEnumValues(HeaderType);
   settingsOptions = this.getEnumValues(Settings);
   id: string;
-  unsubscribeAll = new Subject<any>();
   widgetForm: FormGroup;
   isLoading = false;
-  type: number;
+  formType: number;
+  defaultWidgetFormValues = {
+    title: '',
+    column: null,
+    type: -1,
+    headerType: -1,
+    settings: -1,
+    data: ''
+  };
 
-  widgetType = WidgetType;
-  headerType = HeaderType;
-  settings = Settings;
-  formType = FormType;
+  WidgetType = WidgetType;
+  HeaderType = HeaderType;
+  Settings = Settings;
+  FormType = FormType;
 
   constructor(
     private appDataService: AppDataService,
@@ -43,9 +50,45 @@ export class WidgetFormComponent implements OnInit, OnDestroy {
     this.widgetForm = this.createWidgetForm();
   }
 
-  ngOnDestroy() {
-    this.unsubscribeAll.next();
-    this.unsubscribeAll.complete();
+  saveWidget(): void {
+    this.isLoading = true;
+    this.widgetForm
+      .get('data')
+      .setValue(JSON.parse(this.widgetForm.value.data));
+    const saveWidgetObservable$ = this.id
+      ? this.appDataService.updateWidget(this.id, this.widgetForm.value)
+      : this.appDataService.createWidget(this.widgetForm.value);
+
+    saveWidgetObservable$
+      .pipe(
+        catchError(err => {
+          this.widgetForm.reset(this.defaultWidgetFormValues);
+          this.isLoading = false;
+          return throwError(err);
+        })
+      )
+      .subscribe(() => {
+        this.navigateToHomepage();
+      });
+  }
+
+  deleteWidget(): void {
+    this.isLoading = true;
+    this.appDataService
+      .deleteWidget(this.id)
+      .pipe(
+        catchError(err => {
+          this.isLoading = false;
+          return throwError(err);
+        })
+      )
+      .subscribe(() => {
+        this.navigateToHomepage();
+      });
+  }
+
+  navigateToHomepage(): void {
+    this.navigationService.navigateToHomepage();
   }
 
   private createWidgetForm(): FormGroup {
@@ -70,50 +113,28 @@ export class WidgetFormComponent implements OnInit, OnDestroy {
 
   private checkIfEditOrAddForm(): void {
     if (this.id) {
-      this.type = FormType.Edit;
+      this.formType = FormType.Edit;
       this.getWidgetById(this.id);
     } else {
-      this.type = FormType.Add;
+      this.formType = FormType.Add;
     }
-  }
-
-  saveWidget(): void {
-    this.isLoading = true;
-    this.widgetForm
-      .get('data')
-      .setValue(JSON.parse(this.widgetForm.value.data));
-    const saveWidgetObservable$ = this.id
-      ? this.appDataService.updateWidget(this.id, this.widgetForm.value)
-      : this.appDataService.createWidget(this.widgetForm.value);
-
-    saveWidgetObservable$.pipe(takeUntil(this.unsubscribeAll)).subscribe(() => {
-      this.navigateToHomepage();
-    });
   }
 
   private getWidgetById(id: string): void {
     this.isLoading = true;
     this.appDataService
       .getWidget(id)
-      .pipe(takeUntil(this.unsubscribeAll))
+      .pipe(
+        catchError(err => {
+          this.isLoading = false;
+          return throwError(err);
+        })
+      )
       .subscribe(widget => {
         this.widgetForm.patchValue(widget);
         this.widgetForm.get('data').setValue(JSON.stringify(widget.data));
+        this.defaultWidgetFormValues = this.widgetForm.value;
         this.isLoading = false;
       });
-  }
-
-  deleteWidget(): void {
-    this.isLoading = true;
-    this.appDataService
-      .deleteWidget(this.id)
-      .pipe(takeUntil(this.unsubscribeAll))
-      .subscribe(() => {
-        this.navigateToHomepage();
-      });
-  }
-
-  navigateToHomepage(): void {
-    this.navigationService.navigateToHomepage();
   }
 }

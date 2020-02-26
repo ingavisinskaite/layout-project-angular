@@ -12,6 +12,6 @@ export class NotificationsService {
   }
 
   showError(message: string): void {
-    this.snackBar.open(message, 'X', { panelClass: ['error'] });
+    this.snackBar.open(message, 'X', { duration: 4000 });
   }
 }

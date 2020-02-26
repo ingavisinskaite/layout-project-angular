@@ -5,22 +5,10 @@ import { HttpErrorResponse } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ErrorService {
-  getClientMessage(error: Error): string {
+  getMessage(error: HttpErrorResponse): string {
     if (!navigator.onLine) {
       return 'No Internet Connection';
     }
-    return error.message ? error.message : error.toString();
-  }
-
-  getClientStack(error: Error): string {
-    return error.stack;
-  }
-
-  getServerMessage(error: HttpErrorResponse): string {
-    return error.message;
-  }
-
-  getServerStack(error: HttpErrorResponse): string {
-    return 'stack';
+    return error.statusText + '. Check logs for more details';
   }
 }

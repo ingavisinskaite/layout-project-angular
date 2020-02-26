@@ -1,13 +1,19 @@
-<ng-template #loading>
+<!-- <ng-template #loading>
   <app-loading-spinner></app-loading-spinner>
-</ng-template>
+</ng-template> -->
 
-<ng-container *ngIf="!isLoading; else loading">
-  <button id="back-button" (click)="navigateToHomepage()">
+<!-- <ng-container *ngIf="!isLoading; else loading"> -->
+<div class="widget-form-container">
+  <button
+    id="back-button"
+    (click)="navigateToHomepage()"
+    [ngClass]="{ disabled: isLoading }"
+    [disabled]="isLoading"
+  >
     &larr; Go back
   </button>
   <div id="widget-form" [formGroup]="widgetForm">
-    <h2>{{ type ? 'Edit widget' : 'Add new widget' }}</h2>
+    <h2>{{ formType === FormType.Edit ? 'Edit widget' : 'Add new widget' }}</h2>
     <input
       type="text"
       placeholder="Title"
@@ -27,19 +33,19 @@
     <select class="field" id="type" formControlName="type">
       <option value="-1" disabled selected hidden>Widget type</option>
       <option *ngFor="let option of widgetTypeOptions" [value]="option">
-        {{ widgetType[option] }}</option
+        {{ WidgetType[option] }}</option
       >
     </select>
     <select class="field" id="header-type" formControlName="headerType">
       <option value="-1" disabled selected hidden>Header type</option>
       <option *ngFor="let option of headerTypeOptions" [value]="option">
-        {{ headerType[option] }}</option
+        {{ HeaderType[option] }}</option
       >
     </select>
     <select class="field" id="settings" formControlName="settings">
       <option value="-1" disabled selected hidden>Settings</option>
       <option *ngFor="let option of settingsOptions" [value]="option">
-        {{ settings[option] }}</option
+        {{ Settings[option] }}</option
       >
     </select>
     <textarea
@@ -49,7 +55,7 @@
       required
       formControlName="data"
     ></textarea>
-    <ng-container *ngIf="type">
+    <ng-container *ngIf="formType === FormType.Edit">
       <button
         class="field"
         id="save-widget"
@@ -70,7 +76,7 @@
         Delete
       </button>
     </ng-container>
-    <ng-container *ngIf="!type">
+    <ng-container *ngIf="formType === FormType.Add">
       <button
         class="field"
         id="save-widget"
@@ -82,4 +88,5 @@
       </button>
     </ng-container>
   </div>
-</ng-container>
+</div>
+<!-- </ng-container> -->

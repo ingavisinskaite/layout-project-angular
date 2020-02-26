@@ -3,7 +3,6 @@ import { Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Widget } from '../models/widget.model';
 import { WidgetType } from '../models/widget-type.model';
-import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
