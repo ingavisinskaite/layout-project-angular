@@ -10,29 +10,31 @@
       class="field"
       id="title"
       formControlName="title"
+      [ngClass]="{ invalid: !isFormControlValid('title')}"
     />
     <input
       type="number"
       placeholder="Column number"
       min="1"
       max="3"
-      class="field"
+      class="field" 
       id="column-number"
       formControlName="column"
+      [ngClass]="{ invalid: !isFormControlValid('column')}"
     />
-    <select class="field" id="type" formControlName="type">
+    <select class="field" id="type" formControlName="type" [ngClass]="{ invalid: !isFormControlValid('type')}">
       <option value="-1" disabled selected hidden>Widget type</option>
       <option *ngFor="let option of widgetTypeOptions" [value]="option">
         {{ WidgetType[option] }}</option
       >
     </select>
-    <select class="field" id="header-type" formControlName="headerType">
+    <select class="field" id="header-type" formControlName="headerType" [ngClass]="{ invalid: !isFormControlValid('headerType')}">
       <option value="-1" disabled selected hidden>Header type</option>
       <option *ngFor="let option of headerTypeOptions" [value]="option">
         {{ HeaderType[option] }}</option
       >
     </select>
-    <select class="field" id="settings" formControlName="settings">
+    <select class="field" id="settings" formControlName="settings" [ngClass]="{ invalid: !isFormControlValid('settings')}">
       <option value="-1" disabled selected hidden>Settings</option>
       <option *ngFor="let option of settingsOptions" [value]="option">
         {{ Settings[option] }}</option
@@ -44,6 +46,7 @@
       placeholder="Widget data in JSON format"
       required
       formControlName="data"
+      [ngClass]="{ invalid: !isFormControlValid('data')}"
     ></textarea>
     <ng-container *ngIf="formType === FormType.Edit">
       <button

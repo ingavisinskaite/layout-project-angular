@@ -10,6 +10,7 @@ import { HeaderType } from 'src/app/models/header-type.model';
 import { Settings } from 'src/app/models/settings.model';
 import { FormType } from 'src/app/models/form-type.model';
 import { LoadingService } from 'src/app/services/loading.service';
+import { ValidationService } from 'src/app/services/validation.service';
 
 @Component({
   selector: 'app-widget-form',
@@ -40,7 +41,8 @@ export class WidgetFormComponent implements OnInit {
   constructor(
     private appDataService: AppDataService,
     private route: ActivatedRoute,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    private validatorService: ValidationService
   ) {}
 
   ngOnInit(): void {
@@ -50,6 +52,10 @@ export class WidgetFormComponent implements OnInit {
   }
 
   saveWidget(): void {
+    if (!this.validateJson(this.widgetForm.value.data)) {
+      alert('nooooo');
+      return;
+    }
     this.widgetForm
       .get('data')
       .setValue(JSON.parse(this.widgetForm.value.data));
@@ -86,6 +92,11 @@ export class WidgetFormComponent implements OnInit {
     this.navigationService.navigateToHomepage();
   }
 
+  isFormControlValid(formControlKey: string): boolean {
+    const formControl = this.widgetForm.get(formControlKey);
+    return formControl.untouched || formControl.valid;
+  }
+
   private createWidgetForm(): FormGroup {
     return new FormGroup({
       title: new FormControl('', Validators.required),
@@ -94,10 +105,10 @@ export class WidgetFormComponent implements OnInit {
         Validators.min(1),
         Validators.max(3)
       ]),
-      type: new FormControl(-1, Validators.required),
-      headerType: new FormControl(-1, Validators.required),
-      settings: new FormControl(-1, Validators.required),
-      data: new FormControl('', Validators.required)
+      type: new FormControl(-1, [Validators.required, this.validatorService.dropdownValidator]),
+      headerType: new FormControl(-1, [Validators.required, this.validatorService.dropdownValidator]),
+      settings: new FormControl(-1, [Validators.required, this.validatorService.dropdownValidator]),
+      data: new FormControl('', [Validators.required, this.validatorService.jsonValidator])
     });
   }
 
@@ -128,5 +139,14 @@ export class WidgetFormComponent implements OnInit {
         this.widgetForm.get('data').setValue(JSON.stringify(widget.data));
         this.defaultWidgetFormValues = this.widgetForm.value;
       });
+  }
+
+  private validateJson(input: string): boolean {
+    try {
+      JSON.parse(input);
+    } catch (e) {
+      return false;
+    }
+    return true;
   }
 }
