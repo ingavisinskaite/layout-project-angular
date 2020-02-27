@@ -10,6 +10,7 @@
   position: fixed;
   width: calc(100% - #{$sidenav-width});
   z-index: 3;
+  animation: slidein 1s;
 
   @media screen and (max-width: $break-tablet) {
     display: none;
@@ -68,5 +69,14 @@
       background-image: url('https://media4.s-nbcnews.com/i/newscms/2019_28/2929131/190618-allan-smith-byline1860_e20f6bbeb1d9b2496dd6943f6a3da256.jpg');
       background-size: cover;
     }
+  }
+}
+
+@keyframes slidein {
+  from {
+    transform: scaleX(0.5);
+  }
+  to {
+    transform: scaleX(1);
   }
 }

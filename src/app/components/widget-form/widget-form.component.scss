@@ -2,6 +2,7 @@
 
 .widget-form-container {
   @extend %flex-column;
+  animation: fadein 1s;
   #widget-form {
     @extend %flex-column;
     text-align: center;
@@ -98,6 +99,10 @@
       background-color: $warn-hover;
       transition: ease-in 0.3s;
     }
+
+    .error-text {
+      color: red;
+    }
   }
 
   #back-button {
@@ -122,13 +127,24 @@
     }
   }
 
-  #back-button.disabled {
-    opacity: 0.65;
-    cursor: not-allowed;
+  #back-button {
+    &.disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
   }
 
   #back-button:hover {
     background-color: $primary-hover;
     transition: ease-in 0.3s;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

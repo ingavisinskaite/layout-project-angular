@@ -47,10 +47,6 @@ export class WidgetFormComponent implements OnInit {
   }
 
   saveWidget(): void {
-    if (!this.validateJson(this.widgetForm.value.data)) {
-      alert('nooooo');
-      return;
-    }
     this.widgetForm
       .get('data')
       .setValue(JSON.parse(this.widgetForm.value.data));
@@ -87,21 +83,24 @@ export class WidgetFormComponent implements OnInit {
 
   private createWidgetForm(): FormGroup {
     return new FormGroup({
-      title: new FormControl('', Validators.required),
-      column: new FormControl('', [
+      title: new FormControl(
+        this.defaultWidgetFormValues.title,
+        Validators.required
+      ),
+      column: new FormControl(this.defaultWidgetFormValues.column, [
         Validators.required,
         Validators.min(1),
         Validators.max(3)
       ]),
-      type: new FormControl(-1, [
+      type: new FormControl(this.defaultWidgetFormValues.type, [
         Validators.required,
         this.validatorService.dropdownValidator
       ]),
-      headerType: new FormControl(-1, [
+      headerType: new FormControl(this.defaultWidgetFormValues.headerType, [
         Validators.required,
         this.validatorService.dropdownValidator
       ]),
-      data: new FormControl('', [
+      data: new FormControl(this.defaultWidgetFormValues.data, [
         Validators.required,
         this.validatorService.jsonValidator
       ])
@@ -128,14 +127,5 @@ export class WidgetFormComponent implements OnInit {
       this.widgetForm.get('data').setValue(JSON.stringify(widget.data));
       this.defaultWidgetFormValues = this.widgetForm.value;
     });
-  }
-
-  private validateJson(input: string): boolean {
-    try {
-      JSON.parse(input);
-    } catch (e) {
-      return false;
-    }
-    return true;
   }
 }

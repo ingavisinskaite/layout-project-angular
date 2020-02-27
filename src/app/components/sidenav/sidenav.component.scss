@@ -5,6 +5,7 @@
   @extend %flex-column;
   position: sticky;
   z-index: 2;
+  animation: 1s linear slidein;
 
   @media screen and (max-width: $break-tablet) {
     flex-direction: row;
@@ -258,5 +259,14 @@
     right: 15px;
     position: absolute;
     cursor: pointer;
+  }
+}
+
+@keyframes slidein {
+  from {
+    transform: scaleY(0.5);
+  }
+  to {
+    transform: scaleY(1);
   }
 }
