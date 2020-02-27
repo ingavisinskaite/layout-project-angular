@@ -47,7 +47,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  private getFilterType() {
+  private getFilterType(): void {
     this.route.params.pipe(takeUntil(this.unsubscribeAll)).subscribe(params => {
       this.type = params.type;
       if (this.type === 'messaging') {

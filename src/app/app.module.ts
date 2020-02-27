@@ -12,7 +12,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { TableWidgetComponent } from './components/table-widget/table-widget.component';
-import { MessagesWidgetComponent } from './components/messaging-widget/messaging-widget.component';
+import { MessagingWidgetComponent } from './components/messaging-widget/messaging-widget.component';
 import { WidgetFormComponent } from './components/widget-form/widget-form.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
@@ -26,7 +26,7 @@ import { LoaderInterceptor } from './interceptors/loading-interceptor';
     SidenavComponent,
     MenuComponent,
     TableWidgetComponent,
-    MessagesWidgetComponent,
+    MessagingWidgetComponent,
     WidgetFormComponent,
     NotFoundComponent,
     LoadingSpinnerComponent

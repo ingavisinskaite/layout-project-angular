@@ -12,7 +12,7 @@ export class SidenavComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  toggleMobileMenu() {
+  toggleMobileMenu(): void {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 }

@@ -8,7 +8,7 @@ import { NavigationService } from 'src/app/services/navigation.service';
   templateUrl: './messaging-widget.component.html',
   styleUrls: ['./messaging-widget.component.scss']
 })
-export class MessagesWidgetComponent implements OnInit {
+export class MessagingWidgetComponent implements OnInit {
   constructor(private navigationService: NavigationService) {}
   HeaderType = HeaderType;
 

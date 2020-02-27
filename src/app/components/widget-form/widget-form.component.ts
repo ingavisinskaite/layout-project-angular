@@ -28,7 +28,6 @@ export class WidgetFormComponent implements OnInit {
     headerType: -1,
     data: ''
   };
-
   WidgetType = WidgetType;
   HeaderType = HeaderType;
   FormType = FormType;
