@@ -4,9 +4,8 @@ import { AppDataService } from 'src/app/services/app-data.service';
 import { Widget } from 'src/app/models/widget.model';
 import { WidgetType } from '../../models/widget-type.model';
 import { NavigationService } from 'src/app/services/navigation.service';
-import { Subject, throwError } from 'rxjs';
-import { takeUntil, catchError } from 'rxjs/operators';
-import { LoadingService } from 'src/app/services/loading.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -41,18 +40,11 @@ export class DashboardComponent implements OnInit {
   }
 
   private getWidgets(type: number): void {
-    this.appDataService
-      .getAllWidgets(type)
-      .pipe(
-        catchError(err => {
-          return throwError(err);
-        })
-      )
-      .subscribe(widgets => {
-        this.column1Widgets = widgets.filter(widget => widget.column === 1);
-        this.column2Widgets = widgets.filter(widget => widget.column === 2);
-        this.column3Widgets = widgets.filter(widget => widget.column === 3);
-      });
+    this.appDataService.getAllWidgets(type).subscribe(widgets => {
+      this.column1Widgets = widgets.filter(widget => widget.column === 1);
+      this.column2Widgets = widgets.filter(widget => widget.column === 2);
+      this.column3Widgets = widgets.filter(widget => widget.column === 3);
+    });
   }
 
   private getFilterType() {

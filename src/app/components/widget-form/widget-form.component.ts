@@ -9,7 +9,6 @@ import { WidgetType } from 'src/app/models/widget-type.model';
 import { HeaderType } from 'src/app/models/header-type.model';
 import { Settings } from 'src/app/models/settings.model';
 import { FormType } from 'src/app/models/form-type.model';
-import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-widget-form',
@@ -70,16 +69,9 @@ export class WidgetFormComponent implements OnInit {
   }
 
   deleteWidget(): void {
-    this.appDataService
-      .deleteWidget(this.id)
-      .pipe(
-        catchError(err => {
-          return throwError(err);
-        })
-      )
-      .subscribe(() => {
-        this.navigateToHomepage();
-      });
+    this.appDataService.deleteWidget(this.id).subscribe(() => {
+      this.navigateToHomepage();
+    });
   }
 
   navigateToHomepage(): void {
@@ -116,17 +108,10 @@ export class WidgetFormComponent implements OnInit {
   }
 
   private getWidgetById(id: string): void {
-    this.appDataService
-      .getWidget(id)
-      .pipe(
-        catchError(err => {
-          return throwError(err);
-        })
-      )
-      .subscribe(widget => {
-        this.widgetForm.patchValue(widget);
-        this.widgetForm.get('data').setValue(JSON.stringify(widget.data));
-        this.defaultWidgetFormValues = this.widgetForm.value;
-      });
+    this.appDataService.getWidget(id).subscribe(widget => {
+      this.widgetForm.patchValue(widget);
+      this.widgetForm.get('data').setValue(JSON.stringify(widget.data));
+      this.defaultWidgetFormValues = this.widgetForm.value;
+    });
   }
 }
