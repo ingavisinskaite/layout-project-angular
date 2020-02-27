@@ -25,6 +25,10 @@
       @media screen and (max-width: $break-laptop) {
         width: $field-width-laptop;
       }
+
+      &.invalid {
+        border: 2px solid red;
+      }
     }
 
     .field:hover,
