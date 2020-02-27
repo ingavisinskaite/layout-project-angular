@@ -1,3 +1,7 @@
+<div class="spinner-wrapper" *ngIf="isLoading">
+  <app-loading-spinner class="loading-spinner"></app-loading-spinner>
+</div>
+
 <div class="widget-form-container">
   <button id="back-button" (click)="navigateToHomepage()">
     &larr; Go back

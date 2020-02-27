@@ -1,36 +1,14 @@
+<ng-template #loading>
+  <app-loading-spinner></app-loading-spinner>
+</ng-template>
+
 <div id="dashboard">
   <div id="columns">
     <section id="column1">
-      <ng-container *ngFor="let widget of column1Widgets">
-        <app-table-widget
-          *ngIf="widget.type === WidgetType.Table"
-          [widgetData]="widget"
-          class="widget table"
-        ></app-table-widget>
-        <app-messaging-widget
-          *ngIf="widget.type === WidgetType.Messaging"
-          [widgetData]="widget"
-          class="widget chat"
-        ></app-messaging-widget>
-      </ng-container>
-    </section>
-    <section id="column2">
-      <ng-container *ngFor="let widget of column2Widgets">
-        <app-table-widget
-          *ngIf="widget.type === WidgetType.Table"
-          [widgetData]="widget"
-          class="widget table"
-        ></app-table-widget>
-        <app-messaging-widget
-          *ngIf="widget.type === WidgetType.Messaging"
-          [widgetData]="widget"
-          class="widget chat"
-        ></app-messaging-widget>
-      </ng-container>
-    </section>
-    <section id="column3">
-      <div id="column3-widgets">
-        <ng-container *ngFor="let widget of column3Widgets">
+      <ng-container
+        *ngIf="column1Widgets && column1Widgets.length > 0; else loading"
+      >
+        <ng-container *ngFor="let widget of column1Widgets">
           <app-table-widget
             *ngIf="widget.type === WidgetType.Table"
             [widgetData]="widget"
@@ -41,6 +19,44 @@
             [widgetData]="widget"
             class="widget chat"
           ></app-messaging-widget>
+        </ng-container>
+      </ng-container>
+    </section>
+    <section id="column2">
+      <ng-container
+        *ngIf="column2Widgets && column2Widgets.length > 0; else loading"
+      >
+        <ng-container *ngFor="let widget of column2Widgets">
+          <app-table-widget
+            *ngIf="widget.type === WidgetType.Table"
+            [widgetData]="widget"
+            class="widget table"
+          ></app-table-widget>
+          <app-messaging-widget
+            *ngIf="widget.type === WidgetType.Messaging"
+            [widgetData]="widget"
+            class="widget chat"
+          ></app-messaging-widget>
+        </ng-container>
+      </ng-container>
+    </section>
+    <section id="column3">
+      <div id="column3-widgets">
+        <ng-container
+          *ngIf="column3Widgets && column3Widgets.length > 0; else loading"
+        >
+          <ng-container *ngFor="let widget of column3Widgets">
+            <app-table-widget
+              *ngIf="widget.type === WidgetType.Table"
+              [widgetData]="widget"
+              class="widget table"
+            ></app-table-widget>
+            <app-messaging-widget
+              *ngIf="widget.type === WidgetType.Messaging"
+              [widgetData]="widget"
+              class="widget chat"
+            ></app-messaging-widget>
+          </ng-container>
         </ng-container>
       </div>
       <section id="column3-innerSection" *ngIf="type === null">

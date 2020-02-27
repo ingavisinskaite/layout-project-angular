@@ -9,6 +9,7 @@ import { WidgetType } from 'src/app/models/widget-type.model';
 import { HeaderType } from 'src/app/models/header-type.model';
 import { FormType } from 'src/app/models/form-type.model';
 import { ValidationService } from 'src/app/services/validation.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-widget-form',
@@ -21,6 +22,8 @@ export class WidgetFormComponent implements OnInit {
   id: string;
   widgetForm: FormGroup;
   formType: number;
+  isLoading: boolean;
+
   defaultWidgetFormValues = {
     title: '',
     column: null,
@@ -37,10 +40,14 @@ export class WidgetFormComponent implements OnInit {
     private appDataService: AppDataService,
     private route: ActivatedRoute,
     private navigationService: NavigationService,
-    private validatorService: ValidationService
+    private validatorService: ValidationService,
+    private loadingService: LoadingService
   ) {}
 
   ngOnInit(): void {
+    this.loadingService.isLoading.subscribe(value => {
+      this.isLoading = value;
+    });
     this.id = this.route.snapshot.paramMap.get('id');
     this.checkIfEditOrAddForm();
     this.widgetForm = this.createWidgetForm();

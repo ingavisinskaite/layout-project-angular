@@ -23,6 +23,7 @@
     #column3 {
       flex: 1;
       @extend %flex-column;
+      position: relative;
 
       @media screen and (max-width: $break-laptop) {
         flex: 1 0 51%;
