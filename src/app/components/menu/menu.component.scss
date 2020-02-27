@@ -10,7 +10,7 @@
   position: fixed;
   width: calc(100% - #{$sidenav-width});
   z-index: 3;
-  animation: slidein 1s;
+  animation: slidein 0.5s;
 
   @media screen and (max-width: $break-tablet) {
     display: none;

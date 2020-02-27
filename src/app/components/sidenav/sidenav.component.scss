@@ -5,7 +5,7 @@
   @extend %flex-column;
   position: sticky;
   z-index: 2;
-  animation: 1s linear slidein;
+  animation: 0.5s slidein;
 
   @media screen and (max-width: $break-tablet) {
     flex-direction: row;

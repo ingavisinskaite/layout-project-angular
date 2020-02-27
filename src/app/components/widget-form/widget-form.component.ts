@@ -21,7 +21,7 @@ export class WidgetFormComponent implements OnInit {
   id: string;
   widgetForm: FormGroup;
   formType: number;
-  defaultWidgetFormValues = {
+  widgetFormValues = {
     title: '',
     column: null,
     type: -1,
@@ -57,7 +57,7 @@ export class WidgetFormComponent implements OnInit {
     saveWidgetObservable$
       .pipe(
         catchError(err => {
-          this.widgetForm.reset(this.defaultWidgetFormValues);
+          this.widgetForm.reset(this.widgetFormValues);
           return throwError(err);
         })
       )
@@ -83,24 +83,21 @@ export class WidgetFormComponent implements OnInit {
 
   private createWidgetForm(): FormGroup {
     return new FormGroup({
-      title: new FormControl(
-        this.defaultWidgetFormValues.title,
-        Validators.required
-      ),
-      column: new FormControl(this.defaultWidgetFormValues.column, [
+      title: new FormControl(this.widgetFormValues.title, Validators.required),
+      column: new FormControl(this.widgetFormValues.column, [
         Validators.required,
         Validators.min(1),
         Validators.max(3)
       ]),
-      type: new FormControl(this.defaultWidgetFormValues.type, [
+      type: new FormControl(this.widgetFormValues.type, [
         Validators.required,
         this.validatorService.dropdownValidator
       ]),
-      headerType: new FormControl(this.defaultWidgetFormValues.headerType, [
+      headerType: new FormControl(this.widgetFormValues.headerType, [
         Validators.required,
         this.validatorService.dropdownValidator
       ]),
-      data: new FormControl(this.defaultWidgetFormValues.data, [
+      data: new FormControl(this.widgetFormValues.data, [
         Validators.required,
         this.validatorService.jsonValidator
       ])
@@ -125,7 +122,7 @@ export class WidgetFormComponent implements OnInit {
     this.appDataService.getWidget(id).subscribe(widget => {
       this.widgetForm.patchValue(widget);
       this.widgetForm.get('data').setValue(JSON.stringify(widget.data));
-      this.defaultWidgetFormValues = this.widgetForm.value;
+      this.widgetFormValues = this.widgetForm.value;
     });
   }
 }
