@@ -14,7 +14,9 @@
 >
   <tr
     class="table-header"
-    [ngClass]="{ dark: widgetData.headerType === HeaderType.Dark }"
+    [ngClass]="{
+      dark: widgetData.headerType === HeaderType.Dark && !widgetData.settings
+    }"
     (click)="openWidgetForm(widgetData.id)"
     title="Click to edit widget"
   >

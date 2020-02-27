@@ -7,7 +7,6 @@ import { AppDataService } from 'src/app/services/app-data.service';
 import { NavigationService } from 'src/app/services/navigation.service';
 import { WidgetType } from 'src/app/models/widget-type.model';
 import { HeaderType } from 'src/app/models/header-type.model';
-import { Settings } from 'src/app/models/settings.model';
 import { FormType } from 'src/app/models/form-type.model';
 import { ValidationService } from 'src/app/services/validation.service';
 
@@ -19,7 +18,6 @@ import { ValidationService } from 'src/app/services/validation.service';
 export class WidgetFormComponent implements OnInit {
   widgetTypeOptions = this.getEnumValues(WidgetType);
   headerTypeOptions = this.getEnumValues(HeaderType);
-  settingsOptions = this.getEnumValues(Settings);
   id: string;
   widgetForm: FormGroup;
   formType: number;
@@ -28,13 +26,11 @@ export class WidgetFormComponent implements OnInit {
     column: null,
     type: -1,
     headerType: -1,
-    settings: -1,
     data: ''
   };
 
   WidgetType = WidgetType;
   HeaderType = HeaderType;
-  Settings = Settings;
   FormType = FormType;
 
   constructor(
@@ -102,10 +98,6 @@ export class WidgetFormComponent implements OnInit {
         this.validatorService.dropdownValidator
       ]),
       headerType: new FormControl(-1, [
-        Validators.required,
-        this.validatorService.dropdownValidator
-      ]),
-      settings: new FormControl(-1, [
         Validators.required,
         this.validatorService.dropdownValidator
       ]),
